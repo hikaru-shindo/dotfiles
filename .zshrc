@@ -6,12 +6,18 @@ ZSH_THEME="pnitsche"
 plugins=(
   ssh-agent 
   git
+  archlinux
+  debian
   docker
   docker-compose
   helm
   kubectl
   minikube
+  mvn
+  gradle
   sudo
+  rsync
+  salt
 )
 
 source ${ZSH}/oh-my-zsh.sh
