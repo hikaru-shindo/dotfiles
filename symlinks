@@ -1,0 +1,16 @@
+.zshrc
+.zlogin
+.zprofile
+.zshenv
+.dircolors
+.xinitrc
+.gemrc
+.gitconfig
+.gitignore_global
+.vimrc
+.config/i3
+.gtkrc-2.0
+.config/gtk-2.0
+.config/gtk-3.0
+.config/user-dirs.dirs
+bin/i3-window-criteria
