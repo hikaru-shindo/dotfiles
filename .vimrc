@@ -50,6 +50,7 @@ set sidescroll=1     " Enable side scrolling
 set cmdheight=1      " Force the command height to 1
 set spelllang=en_us  " Set default spell check language to English US
 set noshowmode       " We show the current mode with airline
+set mouse-=a         " We want to copy text normally
 set hidden
 set signcolumn=yes   " Always show the sign column
 set fillchars=""
