@@ -18,6 +18,7 @@ plugins=(
   sudo
   rsync
   salt
+  terraform
 )
 
 source ${ZSH}/oh-my-zsh.sh
