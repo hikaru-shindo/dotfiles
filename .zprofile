@@ -6,6 +6,10 @@ if [[ -n $DISPLAY ]]; then setxkbmap us altgr-intl; fi
 export PATH="${HOME}/bin:${PATH}"
 export MAKEFLAGS="-j$(nproc)"
 
+if [ -x /usr/bin/gnome-terminal ]; then
+  export TERMINAL="gnome-terminal"
+fi
+
 # Aliases
 alias c="clear"
 alias ls='ls --color=auto'
