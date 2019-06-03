@@ -14,6 +14,7 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-unimpaired'
 Plug 'nelstrom/vim-visual-star-search'
 Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'tomtom/tcomment_vim'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'w0rp/ale'
@@ -237,6 +238,7 @@ let g:terminal_ansi_colors = [
 
 " Airline
 let g:airline_powerline_fonts = 1
+let g:airline_theme = 'term'
 let g:airline_detect_modified = 0
 let g:airline#extensions#hunks#non_zero_only = 1
 let g:airline#extensions#branch#enabled = 0
