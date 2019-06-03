@@ -14,8 +14,6 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-unimpaired'
 Plug 'nelstrom/vim-visual-star-search'
 Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'lifepillar/vim-solarized8'
 Plug 'tomtom/tcomment_vim'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'w0rp/ale'
@@ -195,8 +193,6 @@ augroup END
 
 " Color scheme
 syntax enable
-set background=dark
-colorscheme solarized8_flat
 highlight DiffAdd    guifg=#009900 guibg=#2D2E27 ctermfg=2 ctermbg=235
 highlight DiffChange guifg=#bbbb00 guibg=#2D2E27 ctermfg=3 ctermbg=235
 highlight DiffDelete guifg=#ff2222 guibg=#2D2E27 ctermfg=1 ctermbg=235
@@ -241,7 +237,6 @@ let g:terminal_ansi_colors = [
 
 " Airline
 let g:airline_powerline_fonts = 1
-let g:airline_theme = 'base16_solarized'
 let g:airline_detect_modified = 0
 let g:airline#extensions#hunks#non_zero_only = 1
 let g:airline#extensions#branch#enabled = 0
