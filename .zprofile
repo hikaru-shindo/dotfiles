@@ -16,5 +16,4 @@ fi
 
 # Aliases
 alias c="clear"
-alias doco="docker-compose"^:w
-
+alias doco="docker-compose"
