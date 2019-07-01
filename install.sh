@@ -23,7 +23,7 @@ mkdir -p ${targetDir}/bin
 echo "-> Create symlinks in ${targetDir}"
 for file in $(cat symlinks); do
     rm -rf ${targetDir}/${file}
-    ln -svT ${thisDir}/${file} ${targetDir}/${file}
+    ln -sv ${thisDir}/${file} ${targetDir}/${file}
 done
 
 echo "-> Initializing vim"
