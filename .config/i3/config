@@ -111,7 +111,7 @@ bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
 # Lock screen
-bindsym $mod+Shift+x exec "i3lock-fancy -p"
+bindsym $mod+Ctrl+q exec "i3lock-fancy -p"
 
 # Screenshots
 bindsym --release $mod+x exec --no-startup-id scrot -s ~/Pictures/screenshots/screenshot_`date +%Y%m%d%H%M%S`.png
