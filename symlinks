@@ -14,3 +14,4 @@
 .config/gtk-3.0
 .config/user-dirs.dirs
 bin/i3-window-criteria
+bin/update-repos

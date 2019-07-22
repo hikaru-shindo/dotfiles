@@ -1,0 +1,31 @@
+#!/bin/bash
+
+if [[ $1 == "pull" ]]; then
+    MODE="pull"
+else
+    MODE="rebase"
+fi
+
+function update_dir {
+    if [ ! -d "$1/.git" ]; then
+        echo -e "\e[33mSkip, no git repo\e[39m"
+        return 0
+    fi
+
+    GIT_PULL_OPTS=""
+    if [[ $MODE == "rebase" ]]; then
+        GIT_PULL_OPTS="--rebase"
+    fi
+
+    git --git-dir="$1/.git" --work-tree="$1" pull $GIT_PULL_OPTS
+}
+
+echo -e "\e[104m\e[37mStarting update (mode: $MODE) ...\e[39m\e[49m"
+REPO_DIR=$(realpath $PWD)
+for dir in $(find $REPO_DIR -maxdepth 1 -type d); do
+  echo -e "\e[32m-> Updating $dir\e[39m"
+  update_dir $dir
+done
+
+echo -e "\e[32mdone.\e[39m"
+
