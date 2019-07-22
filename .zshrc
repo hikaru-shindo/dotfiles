@@ -23,3 +23,7 @@ plugins=(
 
 source ${ZSH}/oh-my-zsh.sh
 
+if [[ -f ${HOME}/.zlocal ]]; then
+  source ${HOME}/.zlocal
+fi
+
