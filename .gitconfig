@@ -1,6 +1,7 @@
 [core]
-	excludesfile = ~/.gitignore_global
+    excludesfile = ~/.gitignore_global
 [user]
-	email = saikootau@gmail.com
-	name = Pascal Nitsche
-	signingkey = FEE503327D63D8D3
+    email = pascal.nitsche@cbc.de
+    name = Pascal Nitsche
+    signingkey = FEE503327D63D8D3
+
