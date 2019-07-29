@@ -31,6 +31,7 @@ else
 endif
 Plug 'sheerun/vim-polyglot'
 Plug 'justinmk/vim-dirvish'
+Plug 'udalov/kotlin-vim'
 call plug#end()
 
 "
