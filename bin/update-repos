@@ -8,7 +8,7 @@ fi
 
 function update_dir {
     if [ ! -d "$1/.git" ]; then
-        echo -e "\e[33mSkip, no git repo\e[39m"
+        echo -e "\x1B[33mSkip, no git repo\x1B[39m"
         return 0
     fi
 
@@ -20,12 +20,11 @@ function update_dir {
     git --git-dir="$1/.git" --work-tree="$1" pull $GIT_PULL_OPTS
 }
 
-echo -e "\e[104m\e[37mStarting update (mode: $MODE) ...\e[39m\e[49m"
-REPO_DIR=$(realpath $PWD)
-for dir in $(find $REPO_DIR -maxdepth 1 -type d); do
-  echo -e "\e[32m-> Updating $dir\e[39m"
+echo -e "\x1B[104m\x1B[37mStarting update (mode: $MODE) ...\x1B[39m\x1B[49m"
+for dir in $(find $PWD -maxdepth 1 -type d); do
+  echo -e "\x1B[32m-> Updating $dir\x1B[39m"
   update_dir $dir
 done
 
-echo -e "\e[32mdone.\e[39m"
+echo -e "\x1B[32mdone.\x1B[39m"
 
