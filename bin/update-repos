@@ -8,8 +8,11 @@ fi
 
 function update_dir {
     if [ ! -d "$1/.git" ]; then
-        echo -e "\x1B[33mSkip, no git repo\x1B[39m"
+        echo -e "\x1B[33m[Warning]\x1B[39m Skipped directory as it is not a git repository"
         return 0
+    fi
+    if [[ $(git --git-dir="$1/.git" --work-tree="$1" branch | grep \* | cut -d ' ' -f2) != "master" ]]; then
+      echo -e "\x1B[33m[Warning]\x1B[39m You are not on \x1B[31mmaster\x1B[39m branch"
     fi
 
     GIT_PULL_OPTS=""
@@ -21,10 +24,16 @@ function update_dir {
 }
 
 echo -e "\x1B[104m\x1B[37mStarting update (mode: $MODE) ...\x1B[39m\x1B[49m"
-for dir in $(find $PWD -maxdepth 1 -type d); do
-  echo -e "\x1B[32m-> Updating $dir\x1B[39m"
-  update_dir $dir
-done
+
+if [ -d $PWD/.git ]; then
+  echo -e "\x1B[32m-> Updating PWD: $PWD\x1B[39m"
+  update_dir $PWD
+else
+  for dir in $(find $PWD -maxdepth 1 -type d); do
+    echo -e "\x1B[32m-> Updating directory $dir\x1B[39m"
+    update_dir $dir
+  done
+fi
 
 echo -e "\x1B[32mdone.\x1B[39m"
 

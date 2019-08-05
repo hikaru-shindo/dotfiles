@@ -17,3 +17,4 @@ fi
 # Aliases
 alias c="clear"
 alias doco="docker-compose"
+alias up="update-repos"
