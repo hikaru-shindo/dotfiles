@@ -15,4 +15,3 @@
 .config/user-dirs.dirs
 bin/i3-window-criteria
 bin/update-repos
-bin/git-cleanup-local
