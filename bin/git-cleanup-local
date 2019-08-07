@@ -1,0 +1,6 @@
+#!/bin/bash
+
+ echo -e "\x1B[32mDeleting local branches without remote counterpart\x1B[39m"
+git branch -r | awk '{print $1}' | egrep -v -f /dev/fd/0 <(git branch -vv | grep origin) | awk '{print $1}' | xargs git branch -d
+
+ echo -e "\x1B[32mDone\x1B[39m"
