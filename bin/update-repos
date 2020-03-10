@@ -23,7 +23,7 @@ function update_dir {
     git --git-dir="$1/.git" --work-tree="$1" pull $GIT_PULL_OPTS
 }
 
-echo -e "\x1B[104m\x1B[37mStarting update (mode: $MODE) ...\x1B[39m\x1B[49m"
+echo -e "\x1B[104m\x1B[39mStarting update (mode: $MODE) ...\x1B[39m\x1B[49m"
 
 if [ -d $PWD/.git ]; then
   echo -e "\x1B[32m-> Updating PWD: $PWD\x1B[39m"
