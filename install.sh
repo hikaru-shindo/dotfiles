@@ -39,7 +39,7 @@ mkdir -p ${XDG_PICTURES_DIR}
 mkdir -p ${XDG_VIDEOS_DIR}
 mkdir -p ${XDG_PICTURES_DIR}/screenshots
 
-if [ "${SHELL}" != "/usr/bin/zsh" ]; then
+if [ "${SHELL}" != $(which zsh) ]; then
     echo "-> Set zsh as default shell"
     chsh -s $(which zsh)
 fi
