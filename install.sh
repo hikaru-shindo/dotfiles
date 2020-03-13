@@ -41,5 +41,5 @@ mkdir -p ${XDG_PICTURES_DIR}/screenshots
 
 if [ "${SHELL}" != "/usr/bin/zsh" ]; then
     echo "-> Set zsh as default shell"
-    chsh -s /usr/bin/zsh
+    chsh -s $(which zsh)
 fi
