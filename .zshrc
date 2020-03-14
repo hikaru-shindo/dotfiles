@@ -6,6 +6,8 @@ ZSH_THEME="pnitsche"
 plugins=(
   ssh-agent 
   git
+  gitignore
+  golang
   archlinux
   debian
   docker
@@ -17,6 +19,8 @@ plugins=(
   gradle
   sudo
   rsync
+  aws
+  doctl
   salt
   terraform
 )
