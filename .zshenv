@@ -6,4 +6,5 @@ export PAGER="less"
 # Aliases
 alias c="clear"
 alias doco="docker-compose"
-
+alias gre="git rebase"
+alias gres="git reset"
