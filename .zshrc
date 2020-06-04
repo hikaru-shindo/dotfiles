@@ -14,6 +14,7 @@ plugins=(
   docker-compose
   helm
   kubectl
+  kube-ps1
   minikube
   mvn
   gradle
@@ -37,3 +38,7 @@ if [[ -f ${HOME}/.zlocal ]]; then
   source ${HOME}/.zlocal
 fi
 
+if [[ "$(command -v kubeoff)" ]]; then
+  kubeoff
+fi
+PROMPT='$(kube_ps1)'$PROMPT
