@@ -2,6 +2,7 @@
 .zlogin
 .zprofile
 .zshenv
+.kubectl_aliases
 .dircolors
 .xinitrc
 .gemrc

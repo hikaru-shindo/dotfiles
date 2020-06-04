@@ -20,6 +20,9 @@ mkdir -p ${targetDir}/.config
 echo "-> Ensure user binary dir"
 mkdir -p ${targetDir}/bin
 
+echo "-> Fetching current kubectl aliases"
+curl -O https://raw.githubusercontent.com/ahmetb/kubectl-aliases/master/.kubectl_aliases
+
 echo "-> Create symlinks in ${targetDir}"
 for file in $(cat symlinks); do
     rm -rf ${targetDir}/${file}

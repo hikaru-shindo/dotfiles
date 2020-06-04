@@ -4,7 +4,7 @@ export VISUAL="vim"
 export PAGER="less"
 
 # Aliases
-alias k="kubectl"
+[ -f ~/.kubectl_aliases ] && source ~/.kubectl_aliases
 alias c="clear"
 alias doco="docker-compose"
 alias gre="git rebase"
