@@ -41,4 +41,4 @@ fi
 if [[ "$(command -v kubeoff)" ]]; then
   kubeoff
 fi
-PROMPT='$(kube_ps1)'$PROMPT
+PROMPT=$PROMPT'$(kube_ps1)'
