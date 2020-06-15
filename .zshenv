@@ -7,5 +7,7 @@ export PAGER="less"
 [ -f ~/.kubectl_aliases ] && source ~/.kubectl_aliases
 alias c="clear"
 alias doco="docker-compose"
-alias gre="git rebase"
-alias gres="git reset"
+
+alias gswm='git switch master'
+alias gswd='git switch develop'
+alias grbom='git rebase origin/master'
