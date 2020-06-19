@@ -4,7 +4,7 @@ if [ -x "$(command -v dircolors)" ]; then eval `dircolors $HOME/.dircolors`i; fi
 if [[ -n $DISPLAY ]]; then setxkbmap us altgr-intl; fi
 
 # Global variables
-export PATH="${HOME}/bin:${PATH}"
+export PATH="${HOME}/bin:/usr/local/sbin:${PATH}"
 
 if [ -x "$(command -v nproc)" ]; then
   export MAKEFLAGS="-j$(nproc)"
