@@ -2,7 +2,6 @@
     excludesfile = ~/.gitignore_global
 	pager = diff-so-fancy | less --tabs=4 -RFX
 [user]
-    email = pascal.nitsche@cbc.de
     name = Pascal Nitsche
     signingkey = FEE503327D63D8D3
 
