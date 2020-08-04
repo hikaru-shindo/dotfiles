@@ -6,6 +6,8 @@ if [[ -n $DISPLAY ]]; then setxkbmap us altgr-intl; fi
 # Global variables
 export PATH="${HOME}/bin:/usr/local/sbin:${PATH}"
 
+export KUBE_PS1_SYMBOL_DEFAULT="⎈ "
+
 if [ -x "$(command -v nproc)" ]; then
   export MAKEFLAGS="-j$(nproc)"
 fi
