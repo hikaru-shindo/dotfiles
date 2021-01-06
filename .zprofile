@@ -29,3 +29,6 @@ alias curltime='curl -o /dev/null -s -w "    time_namelookup:  %{time_namelookup
  time_starttransfer:  %{time_starttransfer}s
                     ----------
          time_total:  %{time_total}s\n"'
+
+# Activate karn if installed
+if which karn > /dev/null; then eval "$(karn init)"; fi
