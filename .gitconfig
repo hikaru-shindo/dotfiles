@@ -3,6 +3,7 @@
 	pager = diff-so-fancy | less --tabs=4 -RFX
 [user]
     name = Pascal Nitsche
+    email = saikootau@gmail.com
     signingkey = FEE503327D63D8D3
 
 [color]
