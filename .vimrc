@@ -32,6 +32,8 @@ endif
 Plug 'sheerun/vim-polyglot'
 Plug 'justinmk/vim-dirvish'
 Plug 'udalov/kotlin-vim'
+Plug 'hashivim/vim-terraform'
+
 call plug#end()
 
 "
