@@ -277,6 +277,10 @@ let g:ackhighlight = 1
 command! -nargs=* -complete=help H :enew | :set buftype=help | :keepalt h <args>
 autocmd FileType help wincmd L
 
+" terraform-vim
+let g:terraform_fmt_on_save=1
+let g:terraform_align=1
+
 " ALE
 let g:ale_linters_explicit = 1
 let g:ale_linters = {
