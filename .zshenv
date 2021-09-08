@@ -24,4 +24,4 @@ alias doco="docker-compose"
 alias gswm='git switch $(git_main_branch)'
 alias gswd='git switch develop'
 alias grbom='git rebase origin/$(git_main_branch)'
-alias wmip='echo IPv4 && curl "https://api.ipify.org/?format=plain" && echo && echo IPv6 && curl "https://api6.ipify.org/?format=plain"'
+alias wmip='echo IPv4 && curl "https://api.ipify.org/?format=plain" && echo && echo IPv4/6 && curl "https://api64.ipify.org/?format=plain"'
