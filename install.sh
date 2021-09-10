@@ -12,7 +12,9 @@ thisDir=$(pwd)
 echo "-> Link my zsh themes"
 mkdir -pv .oh-my-zsh/custom/themes
 ln -svf ${thisDir}/zeta.zsh-theme ${targetDir}/.oh-my-zsh/custom/themes/
+
 ln -svf ${thisDir}/pnitsche.zsh-theme ${targetDir}/.oh-my-zsh/custom/themes/
+ln -svf ${thisDir}/pnitsche-agnoster.zsh-theme ${targetDir}/.oh-my-zsh/custom/themes/
 
 echo "-> Ensure config dir"
 mkdir -p ${targetDir}/.config
