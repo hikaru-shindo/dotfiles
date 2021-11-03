@@ -16,6 +16,11 @@ if [ -x "$(command -v gnome-terminal)" ]; then
   export TERMINAL="gnome-terminal"
 fi
 
+# Setup homebrew environment if needed
+if [ -x /opt/homebrew/bin/brew ]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
+
 # Aliases
 alias c="clear"
 alias doco="docker-compose"
