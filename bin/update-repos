@@ -7,11 +7,13 @@ else
 fi
 
 function update_dir {
-    branch=$(git --git-dir="$1/.git" --work-tree="$1" branch | grep \* | cut -d ' ' -f2)
     if [ ! -d "$1/.git" ]; then
         echo -e "\x1B[33m[Warning]\x1B[39m Skipped directory as it is not a git repository"
         return 0
     fi
+
+    branch=$(git --git-dir="$1/.git" --work-tree="$1" branch | grep \* | cut -d ' ' -f2)
+
     if [[ $branch != "master" && $branch != "main" ]]; then
       echo -e "\x1B[33m[Warning]\x1B[39m You are not on \x1B[31mmaster\x1B[39m or \x1B[31mmain\x1B[39m branch"
     fi
