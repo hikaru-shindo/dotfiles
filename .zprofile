@@ -21,6 +21,17 @@ if [ -x /opt/homebrew/bin/brew ]; then
   eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
+# Setup jenv if needed
+if [ -x "$(command -v jenv)" ]; then
+  export PATH="$HOME/.jenv/bin:$PATH"
+  eval "$(jenv init -)"
+fi
+
+# Setup brew java if needed
+if [ -d /opt/homebrew/opt/openjdk/bin ]; then
+  export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
+fi
+
 # Aliases
 alias c="clear"
 alias doco="docker-compose"
