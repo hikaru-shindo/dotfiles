@@ -14,6 +14,8 @@
 .config/gtk-2.0
 .config/gtk-3.0
 .config/user-dirs.dirs
+.warp/themes/arc_dark.yaml
+.warp/themes/github_dark_dimmed.yaml
 bin/i3-window-criteria
 bin/update-repos
 bin/prune-repos

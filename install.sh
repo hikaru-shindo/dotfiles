@@ -22,6 +22,10 @@ mkdir -p ${targetDir}/.config
 echo "-> Ensure user binary dir"
 mkdir -p ${targetDir}/bin
 
+echo "-> Ensure warp config directories"
+mkdir -p ${targetDir}/.warp/themes
+mkdir -p ${targetDir}/.warp/workflows
+
 echo "-> Fetching current kubectl aliases"
 curl -O https://raw.githubusercontent.com/ahmetb/kubectl-aliases/master/.kubectl_aliases
 
