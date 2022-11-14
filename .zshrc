@@ -1,45 +1,21 @@
-# Path to your oh-my-zsh installation.
 export ZSH=${HOME}/.oh-my-zsh
 
-ZSH_THEME="pnitsche"
-DEFAULT_USER="$USER"
+ZSH_THEME=""
 
 plugins=(
   ssh-agent 
   git
   gitignore
   golang
-  archlinux
-  debian
   docker
-  docker-compose
-  helm
-  kubectl
-  kube-ps1
-  minikube
-  mvn
   gradle
-  sudo
-  rsync
-  aws
-  doctl
-  salt
-  terraform
 )
 
 source ${ZSH}/oh-my-zsh.sh
 
-# Set iterm2 bindings if needed
-if [[ $(which bindkey) ]]; then
-  bindkey "[D" backward-word
-  bindkey "[C" forward-word
+if [[ -f ${HOME}/.zsh/zlocal ]]; then
+  source ${HOME}/.zsh/zlocal
 fi
 
-if [[ -f ${HOME}/.zlocal ]]; then
-  source ${HOME}/.zlocal
-fi
-
-if [[ "$(command -v kubeoff)" ]]; then
-  kubeoff
-fi
-PROMPT=$PROMPT'$(kube_ps1)'
+#Star Ship
+eval "$(starship init zsh)"

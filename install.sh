@@ -6,25 +6,14 @@ targetDir=${HOME}
 cd $(dirname ${0})
 thisDir=$(pwd)
 
-#echo "-> Update submodules"
-#git submodule update --init --recursive
-
-echo "-> Link my zsh themes"
-mkdir -pv .oh-my-zsh/custom/themes
-ln -svf ${thisDir}/zeta.zsh-theme ${targetDir}/.oh-my-zsh/custom/themes/
-
-ln -svf ${thisDir}/pnitsche.zsh-theme ${targetDir}/.oh-my-zsh/custom/themes/
-ln -svf ${thisDir}/pnitsche-agnoster.zsh-theme ${targetDir}/.oh-my-zsh/custom/themes/
-
-echo "-> Ensure config dir"
+echo "-> Ensure config directories"
 mkdir -p ${targetDir}/.config
+mkdir -p ${targetDir}/.zsh
+mkdir -p ${targetDir}/.warp/themes
+mkdir -p ${targetDir}/.warp/workflows
 
 echo "-> Ensure user binary dir"
 mkdir -p ${targetDir}/bin
-
-echo "-> Ensure warp config directories"
-mkdir -p ${targetDir}/.warp/themes
-mkdir -p ${targetDir}/.warp/workflows
 
 echo "-> Fetching current kubectl aliases"
 curl -O https://raw.githubusercontent.com/ahmetb/kubectl-aliases/master/.kubectl_aliases
