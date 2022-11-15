@@ -2,6 +2,10 @@
 .zlogin
 .zprofile
 .zshenv
+
+.zsh/common
+.zsh/linux
+.zsh/macos
 .kubectl_aliases
 .dircolors
 .xinitrc
