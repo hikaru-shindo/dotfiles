@@ -1,8 +1,6 @@
 .zshrc
 .zlogin
 .zprofile
-.zshenv
-
 .zsh/common
 .zsh/linux
 .zsh/macos

@@ -13,3 +13,5 @@ alias curltime='curl -o /dev/null -s -w "    time_namelookup:  %{time_namelookup
     time_total:  %{time_total}s\n"'
 
 alias wmip='echo IPv4 && curl "https://api.ipify.org/?format=plain" && echo && echo IPv4/6 && curl "https://api64.ipify.org/?format=plain"'
+
+[ -f "${HOME}/.kubectl_aliases" ] && source ~/.kubectl_aliases

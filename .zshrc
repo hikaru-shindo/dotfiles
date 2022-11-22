@@ -28,6 +28,9 @@ case $(get_os_family) in
         ;;
 esac
 
+# Needs to be loaded after homebrew to be sure path is correct
+source ${HOME}/.zsh/common/env.zsh
+
 # Needs to be loaded after homebrew to ensure alias is working!
 source ${HOME}/.zsh/common/karn.zsh
 
