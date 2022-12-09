@@ -15,7 +15,6 @@ source ${ZSH}/oh-my-zsh.sh
 
 # Load custom config
 source ${HOME}/.zsh/common/functions.zsh
-source ${HOME}/.zsh/common/aliases.zsh
 source ${HOME}/.zsh/common/make.zsh
 
 case $(get_os_family) in
@@ -30,9 +29,8 @@ esac
 
 # Needs to be loaded after homebrew to be sure path is correct
 source ${HOME}/.zsh/common/env.zsh
-
-# Needs to be loaded after homebrew to ensure alias is working!
 source ${HOME}/.zsh/common/karn.zsh
+source ${HOME}/.zsh/common/aliases.zsh
 
 # Load local overrides
 if [[ -f ${HOME}/.zsh/zlocal.zsh ]]; then

@@ -14,4 +14,6 @@ alias curltime='curl -o /dev/null -s -w "    time_namelookup:  %{time_namelookup
 
 alias wmip='echo IPv4 && curl "https://api.ipify.org/?format=plain" && echo && echo IPv4/6 && curl "https://api64.ipify.org/?format=plain"'
 
+[[ -x "$(command -v podman)" && ! -x "$(command -v docker)" ]] && alias docker="podman"
+
 [ -f "${HOME}/.kubectl_aliases" ] && source ~/.kubectl_aliases
