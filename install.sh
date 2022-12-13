@@ -8,7 +8,6 @@ thisDir=$(pwd)
 
 echo "-> Ensure config directories"
 mkdir -p ${targetDir}/.config
-mkdir -p ${targetDir}/.config/fish
 mkdir -p ${targetDir}/.zsh
 mkdir -p ${targetDir}/.warp/themes
 mkdir -p ${targetDir}/.warp/workflows
@@ -37,6 +36,17 @@ mkdir -p ${XDG_MUSIC_DIR}
 mkdir -p ${XDG_PICTURES_DIR}
 mkdir -p ${XDG_VIDEOS_DIR}
 mkdir -p ${XDG_PICTURES_DIR}/screenshots
+
+echo "-> Setting up fish"
+mkdir -p ${targetDir}/.config/fish
+mkdir -p ${targetDir}/.config/fish/conf.d
+
+rm -f ${targetDir}/.config/fish/config.fish
+ln -sv ${thisDir}/.config/fish/config.fish ${targetDir}/.config/fish/config.fish
+for file in $(find ${thisDir}/.config/fish/conf.d -type f -execdir echo {} ';'); do
+    rm -f ${targetDir}/.config/fish/conf.d/${file}
+    ln -sv ${thisDir}/.config/fish/conf.d/${file} ${targetDir}/.config/fish/conf.d/${file}
+done
 
 if [ "${SHELL}" != $(which zsh) ]; then
     echo "-> Set zsh as default shell"
