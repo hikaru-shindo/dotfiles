@@ -8,6 +8,7 @@ thisDir=$(pwd)
 
 echo "-> Ensure config directories"
 mkdir -p ${targetDir}/.config
+mkdir -p ${targetDir}/.config/fish
 mkdir -p ${targetDir}/.zsh
 mkdir -p ${targetDir}/.warp/themes
 mkdir -p ${targetDir}/.warp/workflows
