@@ -13,7 +13,6 @@
 .vimrc
 .config/i3
 .gtkrc-2.0
-.config/fish/config.fish
 .config/gtk-2.0
 .config/gtk-3.0
 .config/user-dirs.dirs
