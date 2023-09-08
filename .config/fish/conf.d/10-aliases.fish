@@ -16,8 +16,8 @@ alias curltime='curl -o /dev/null -s -w "    time_namelookup:  %{time_namelookup
 
 alias wmip='echo IPv4 && curl "https://api.ipify.org/?format=plain" && echo && echo IPv4/6 && curl "https://api64.ipify.org/?format=plain"'
 
-if command -sq exa
-    alias ls="exa --git --header --icons"
+if command -sq eza
+    alias ls="eza --git --header --icons"
 end
 
 if test -f ~/.kubectl_aliases
