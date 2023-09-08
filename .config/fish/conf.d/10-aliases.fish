@@ -20,10 +20,6 @@ if command -sq exa
     alias ls="exa --git --header --icons"
 end
 
-if command -sq podman and not command -sq docker
-    alias docker=podman
-end
-
 if test -f ~/.kubectl_aliases
     source ~/.kubectl_aliases
 end 
