@@ -11,3 +11,7 @@ if test -x (command -v vim)
     set -x -g EDITOR vim
     set -x -g VISUAL vim
 end
+
+if command -sq eza
+    alias ls="eza --git --header --icons"
+end

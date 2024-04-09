@@ -1,0 +1,60 @@
+- defaults:
+    link:
+      relink: true
+      glob: true
+
+- clean: ['~']
+
+- link:
+    # Common files
+    ~/.vimrc: common/vimrc
+    ~/.gemrc: common/gemrc
+    ~/.gitconfig: common/gitconfig
+    ~/.gitignore_global: common/gitignore_global
+    ~/.config/:
+      path: common/config/**
+    ~/bin/:
+      path: common/bin/**
+    # macOS specific files
+    ~/.warp/themes/:
+      if: '[ `uname` = Darwin ]'
+      path: darwin/warp/themes/**
+    ~/.config/fish/conf.d/00-homebrew.fish:
+      if: '[ `uname` = Darwin ]'
+      path: darwin/config/fish/conf.d/00-homebrew.fish
+    # Linux specific files
+    ~/.dircolors:
+      if: '[ `uname` = Linux ]'
+      path: linux/dircolors
+    ~/bin/x-window-criteria:
+      if: '[ `uname` = Linux ]'
+      path: linux/bin/x-window-criteria
+    ~/.gtkrc-2.0:
+      if: '[ `uname` = Linux ]'
+      path: linux/gtkrc-2.0
+    ~/.config/gtk-2.0/:
+      if: '[ `uname` = Linux ]'
+      path: linux/config/gtk-2.0/**
+    ~/.config/gtk-3.0/:
+      if: '[ `uname` = Linux ]'
+      path: linux/config/gtk-2.0/**
+    ~/.config/i3:
+      if: '[ `uname` = Linux ]'
+      path: linux/config/i3/**
+    ~/.config/user-dirs.dirs:
+      if: '[ `uname` = Linux ]'
+      path: linux/config/user-dirs.dirs
+
+- create:
+    # XDG_CONFIG_DIRS
+    - ~/Documents
+    - ~/Downloads
+    - ~/Music
+    - ~/Pictures
+    - ~/Pictures/screenshots
+    - ~/Videos
+
+- shell:
+  - [git submodule update --init --recursive, Installing submodules]
+  - curl -o ~/.config/fish/conf.d/kubectl_aliases.fish https://raw.githubusercontent.com/ahmetb/kubectl-aliases/master/.kubectl_aliases.fish
+  - vim +PlugInstall +qall

@@ -3,7 +3,7 @@
 # Activate karn if installed
 if command -sq karn
     # The normal init command is not compatible with fish, so we override it ourselves
-    #eval (karn init)
+    # see: https://github.com/prydonius/karn#Usage
 
     function git
         karn update
