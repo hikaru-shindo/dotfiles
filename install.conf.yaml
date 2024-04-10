@@ -56,5 +56,5 @@
 
 - shell:
   - [git submodule update --init --recursive, Installing submodules]
-  - curl -o ~/.config/fish/conf.d/kubectl_aliases.fish https://raw.githubusercontent.com/ahmetb/kubectl-aliases/master/.kubectl_aliases.fish
-  - vim +PlugInstall +qall
+  - [curl -o ~/.config/fish/conf.d/kubectl_aliases.fish https://raw.githubusercontent.com/ahmetb/kubectl-aliases/master/.kubectl_aliases.fish, Installing kubectl aliases]
+  - [vim +PlugInstall +qall, Updating vim plugins]
