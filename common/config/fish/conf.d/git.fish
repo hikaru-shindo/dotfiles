@@ -2,6 +2,7 @@
 
 abbr --add -g gco -- git checkout
 abbr --add -g gsw -- git switch
+abbr --add -g gswc -- git switch --create
 abbr --add -g ga -- git add
 abbr --add -g gaa -- git add --all
 abbr --add -g gapa -- git add --patch
@@ -26,3 +27,5 @@ abbr --add -g grbi -- git rebase --interactive
 abbr --add -g grbs -- git rebase --skip
 abbr --add -g gss -- git status --short
 abbr --add -g gsb -- git status --short --branch
+abbr --add -g grh -- git reset
+abbr --add -g grhh -- git reset --hard
