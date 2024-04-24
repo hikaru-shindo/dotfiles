@@ -3,7 +3,12 @@
       relink: true
       glob: true
 
-- clean: ['~']
+- clean: ["~"]
+- clean:
+    ~/:
+      force: true
+    ~/.config/:
+      recursive: true
 
 - link:
     # Common files
@@ -13,6 +18,9 @@
     ~/.gitignore_global: common/gitignore_global
     ~/.config/:
       path: common/config/**
+    ~/.config/nvim/init.vim:
+      path: common/vimrc
+      create: true
     ~/bin/:
       path: common/bin/**
     # macOS specific files
@@ -58,3 +66,5 @@
   - [git submodule update --init --recursive, Installing submodules]
   - [curl -o ~/.config/fish/conf.d/kubectl_aliases.fish https://raw.githubusercontent.com/ahmetb/kubectl-aliases/master/.kubectl_aliases.fish, Installing kubectl aliases]
   - [vim +PlugInstall +qall, Updating vim plugins]
+  - [ curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim, Installing vim-plug]
+  - ["command -v nvim && nvim +PlugInstall +qall || true" , Updating neovim plugins]
