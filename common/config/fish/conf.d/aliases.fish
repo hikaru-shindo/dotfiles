@@ -10,3 +10,7 @@ alias curltime='curl -o /dev/null -s -w "    time_namelookup:  %{time_namelookup
     time_starttransfer:  %{time_starttransfer}s
     ----------
     time_total:  %{time_total}s\n"'
+
+if test -x (command -v nvim)
+    alias vim=nvim
+end
