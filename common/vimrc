@@ -33,6 +33,9 @@ Plug 'sheerun/vim-polyglot'
 Plug 'justinmk/vim-dirvish'
 Plug 'udalov/kotlin-vim'
 Plug 'hashivim/vim-terraform'
+if has('nvim')
+  Plug 'ThePrimeagen/vim-be-good'
+endif
 
 call plug#end()
 
