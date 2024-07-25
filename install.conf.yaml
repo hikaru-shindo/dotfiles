@@ -24,6 +24,9 @@
     ~/.warp/themes/:
       if: '[ `uname` = Darwin ]'
       path: darwin/warp/themes/**
+    ~/.config/fish/conf.d/00-config-dir.fish:
+      if: '[ `uname` = Darwin ]'
+      path: darwin/config/fish/conf.d/00-config-dir.fish
     ~/.config/fish/conf.d/00-homebrew.fish:
       if: '[ `uname` = Darwin ]'
       path: darwin/config/fish/conf.d/00-homebrew.fish
