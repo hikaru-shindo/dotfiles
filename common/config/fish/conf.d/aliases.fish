@@ -11,6 +11,10 @@ alias curltime='curl -o /dev/null -s -w "    time_namelookup:  %{time_namelookup
     ----------
     time_total:  %{time_total}s\n"'
 
-if test -x (command -v nvim)
+if command -sq nvim
     alias vim=nvim
+end
+
+if command -sq lazygit
+    abbr --add -g lg lazygit
 end
