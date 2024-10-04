@@ -1,7 +1,7 @@
 return {
     "neovim/nvim-lspconfig",
 
-    tag = "v0.1.8",
+    tag = "v1.0.0",
 
     dependencies = {
         "williamboman/mason.nvim",
@@ -31,7 +31,6 @@ return {
             ensure_installed = {
                 "lua_ls",
                 "dockerls",
-                "html",
                 "helm_ls",
                 "jinja_lsp",
                 "kotlin_language_server",
@@ -39,10 +38,11 @@ return {
                 "rust_analyzer",
                 "sqlls",
                 "terraformls",
-                "tsserver",
+                "ts_ls",
                 "gitlab_ci_ls",
                 "yamlls",
                 "gopls",
+                "flux_lsp",
             },
             handlers = {
                 function(server_name) -- default handler (optional)
