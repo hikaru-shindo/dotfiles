@@ -65,4 +65,6 @@
 - shell:
   - [git submodule update --init --recursive, Installing submodules]
   - [curl -o ~/.config/fish/conf.d/kubectl_aliases.fish https://raw.githubusercontent.com/ahmetb/kubectl-aliases/master/.kubectl_aliases.fish, Installing kubectl aliases]
+  - [mkdir -p ~/.config/alacritty/themes, Ensure alacritty theme directory]
+  - [curl -o ~/.config/alacritty/themes/github_dark_dimmed.toml https://raw.githubusercontent.com/alacritty/alacritty-theme/refs/heads/master/themes/github_dark_dimmed.toml, Download github_dimmed_dark alacritty theme] 
   - ["command -v nvim && nvim --headless '+Lazy! sync' +qall || true", Updating neovim plugins]
