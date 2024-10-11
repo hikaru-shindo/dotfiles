@@ -49,6 +49,9 @@
     ~/.config/i3:
       if: '[ `uname` = Linux ]'
       path: linux/config/i3/**
+    ~/.config/sway:
+      if: '[ `uname` = Linux ]'
+      path: linux/config/sway/**
     ~/.config/user-dirs.dirs:
       if: '[ `uname` = Linux ]'
       path: linux/config/user-dirs.dirs
