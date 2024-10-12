@@ -220,4 +220,9 @@ bar {
 # This is annoying -- just turn it off
 focus_follows_mouse no
 
+# autostart
+exec --no-startup-id blueman-applet
+exec --no-startup-id nm-applet
+
+
 include /etc/sway/config.d/*
