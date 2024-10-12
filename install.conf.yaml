@@ -52,6 +52,9 @@
     ~/.config/sway:
       if: '[ `uname` = Linux ]'
       path: linux/config/sway/**
+    ~/.config/waybar:
+      if: '[ `uname` = Linux ]'
+      path: linux/config/waybar/**
     ~/.config/user-dirs.dirs:
       if: '[ `uname` = Linux ]'
       path: linux/config/user-dirs.dirs
