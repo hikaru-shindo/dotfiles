@@ -52,6 +52,9 @@
     ~/.config/sway:
       if: '[ `uname` = Linux ]'
       path: linux/config/sway/**
+    ~/.config/mako:
+      if: '[ `uname` = Linux ]'
+      path: linux/config/mako/**
     ~/.config/waybar:
       if: '[ `uname` = Linux ]'
       path: linux/config/waybar/**
