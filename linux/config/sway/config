@@ -208,7 +208,7 @@ bar {
     # The default just shows the current date and time.
     #status_command while date +'%Y-%m-%d %X'; do sleep 1; done
     #status_command i3status
-    status_command waybar
+    swaybar_command waybar
 
     #colors {
     #    statusline #ffffff
