@@ -1,0 +1,48 @@
+/* Colours: github-dark-dimmed */
+
+* {
+    font-family: "JetBrains Mono", monospace;
+    line-height: 1.5em;
+}
+
+window {
+    background-color: #262c36;
+}
+
+#input {
+    margin: 5px;
+    border-radius: 0px;
+    border: 1px solid #3d444d;
+    background-color: transparent;
+    color: #d1d7e0;
+}
+
+#inner-box {
+    background-color: #262c36;
+}
+
+#outer-box {
+    padding: 10px;
+    background-color: #262c36;
+    border: 3px solid #3d444d;
+}
+
+#scroll {
+}
+
+#text {
+    padding: 5px;
+    color: #d1d7e0;
+}
+
+#entry {
+    border-bottom: 1px solid #3d444d;
+}
+
+#entry:selected {
+    background-color: #143d79;
+}
+
+#text:selected {
+    font-weight: bold;
+}

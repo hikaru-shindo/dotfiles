@@ -61,6 +61,10 @@
       if: '[ `uname` = Linux ]'
       path: linux/config/sway/**
       create: true
+    ~/.config/wofi:
+      if: '[ `uname` = Linux ]'
+      path: linux/config/wofi/**
+      create: true
     ~/.config/mako:
       if: '[ `uname` = Linux ]'
       path: linux/config/mako/**
