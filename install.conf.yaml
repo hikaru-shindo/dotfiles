@@ -87,4 +87,7 @@
   - [curl -o ~/.config/fish/conf.d/kubectl_aliases.fish https://raw.githubusercontent.com/ahmetb/kubectl-aliases/master/.kubectl_aliases.fish, Installing kubectl aliases]
   - [mkdir -p ~/.config/alacritty/themes, Ensure alacritty theme directory]
   - [curl -o ~/.config/alacritty/themes/github_dark_dimmed.toml https://raw.githubusercontent.com/alacritty/alacritty-theme/refs/heads/master/themes/github_dark_dimmed.toml, Download github_dimmed_dark alacritty theme] 
+  - [mkdir -p ~/.config/tmux/plugins, Ensure tmux plugin directory]
+  - ["test ! -d ~/.config/tmux/plugins/tpm && git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm || true", Install tmux plugin manager]
+  - [git -C ~/.config/tmux/plugins/tpm pull --rebase, Update tmux plugin manager]
   - ["command -v nvim && nvim --headless '+Lazy! sync' +qall || true", Updating neovim plugins]
