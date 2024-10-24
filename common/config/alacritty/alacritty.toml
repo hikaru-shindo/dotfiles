@@ -1,3 +1,4 @@
+[general]
 import = [
     "~/.config/alacritty/themes/github_dark_dimmed.toml"
 ]
@@ -23,3 +24,4 @@ style = "Italic"
 [font.normal]
 family = "JetBrains Mono"
 style = "Regular"
+
