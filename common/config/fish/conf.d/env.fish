@@ -1,5 +1,8 @@
 #!/usr/bin/env fish
 
+# default to vi mode
+fish_vi_key_bindings
+
 fish_add_path -ga /usr/local/sbin
 fish_add_path -gp {$HOME}/bin
 
