@@ -1,6 +1,6 @@
 return {
-    "projekt0n/github-nvim-theme", tag = "v1.0.2",
+    "catppuccin/nvim", name = "catpuccin", priority = 1000,
     config = function()
-      vim.cmd.colorscheme("github_dark_dimmed")
+      vim.cmd.colorscheme("catppuccin-macchiato")
     end,
 }
