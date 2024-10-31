@@ -1,0 +1,9 @@
+k9s:
+  ui:
+    skin: catppuccin-macchiato
+  shellPod:
+    image: nicolaka/netshoot:v0.13
+    namespace: default
+    limits:
+      cpu: 100m
+      memory: 100Mi
