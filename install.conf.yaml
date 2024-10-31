@@ -82,6 +82,14 @@
       if: '[ `uname` = Linux ]'
       path: ~/.local/share/themes/catppuccin-macchiato-blue-standard+default/gtk-4.0/gtk.css
       create: true
+    ~/.config/gtk-4.0:
+      if: '[ `uname` = Linux ]'
+      path: linux/config/gtk-4.0/**
+      create: true
+    ~/.config/gtk-3.0:
+      if: '[ `uname` = Linux ]'
+      path: linux/config/gtk-3.0/**
+      create: true
     ~/.config/gtk-4.0/gtk-dark.css:
       if: '[ `uname` = Linux ]'
       path: ~/.local/share/themes/catppuccin-macchiato-blue-standard+default/gtk-4.0/gtk-dark.css
@@ -92,6 +100,22 @@
     ~/.local/share/themes:
       if: '[ `uname` = Linux ]'
       path: linux/local/share/themes/**
+      create: true
+    ~/.local/share/color-schemes:
+      if: '[ `uname` = Linux ]'
+      path: linux/local/share/color-schemes/**
+      create: true
+    ~/.config/qt6ct:
+      if: '[ `uname` = Linux ]'
+      path: linux/config/qt6ct/**
+      create: true
+    ~/.config/kdeglobals:
+      if: '[ `uname` = Linux ]'
+      path: linux/config/kdeglobals
+      create: true
+    ~/.config/baloofilerc:
+      if: '[ `uname` = Linux ]'
+      path: linux/config/baloofilerc
       create: true
 
 - create:

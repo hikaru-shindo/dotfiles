@@ -21,3 +21,10 @@ end
 if command -sq eza
     alias ls="eza --git --header --icons"
 end
+
+if test 'uname = Linux'
+  set -x -g QT_QPA_PLATFORM wayland
+  set -x -g QT_QPA_PLATFORMTHEME qt6ct
+  set -x -g QT_WAYLAND_DISABLE_WINDOWDECORATION 1
+end
+
