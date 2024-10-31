@@ -62,9 +62,37 @@
       if: '[ `uname` = Linux ]'
       path: linux/config/waybar/**
       create: true
+    ~/.config/gtk-3.0/assets:
+      if: '[ `uname` = Linux ]'
+      path: ~/.local/share/themes/catppuccin-macchiato-blue-standard+default/gtk-3.0/assets
+      create: true
+    ~/.config/gtk-3.0/gtk.css:
+      if: '[ `uname` = Linux ]'
+      path: ~/.local/share/themes/catppuccin-macchiato-blue-standard+default/gtk-3.0/gtk.css
+      create: true
+    ~/.config/gtk-3.0/gtk-dark.css:
+      if: '[ `uname` = Linux ]'
+      path: ~/.local/share/themes/catppuccin-macchiato-blue-standard+default/gtk-3.0/gtk-dark.css
+      create: true
+    ~/.config/gtk-4.0/assets:
+      if: '[ `uname` = Linux ]'
+      path: ~/.local/share/themes/catppuccin-macchiato-blue-standard+default/gtk-4.0/assets
+      create: true
+    ~/.config/gtk-4.0/gtk.css:
+      if: '[ `uname` = Linux ]'
+      path: ~/.local/share/themes/catppuccin-macchiato-blue-standard+default/gtk-4.0/gtk.css
+      create: true
+    ~/.config/gtk-4.0/gtk-dark.css:
+      if: '[ `uname` = Linux ]'
+      path: ~/.local/share/themes/catppuccin-macchiato-blue-standard+default/gtk-4.0/gtk-dark.css
+      create: true
     ~/.config/user-dirs.dirs:
       if: '[ `uname` = Linux ]'
       path: linux/config/user-dirs.dirs
+    ~/.local/share/themes:
+      if: '[ `uname` = Linux ]'
+      path: linux/local/share/themes/**
+      create: true
 
 - create:
     # XDG_CONFIG_DIRS
