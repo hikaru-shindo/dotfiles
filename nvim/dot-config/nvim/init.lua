@@ -1,0 +1,1 @@
+require("hikaru-shindo")

@@ -1,0 +1,29 @@
+root = true
+
+[*]
+charset = utf-8
+
+end_of_line = lf
+insert_final_newline = true
+
+trim_trailing_whitespace = true
+
+indent_style = space
+indent_size = 4
+
+[*.md]
+trim_trailing_whitespace = false
+
+[{*.yml,*.yaml}]
+indent_size = 2
+
+# Ignore some rules on third-party copied themes and stuff
+# so the linter won't clutter my output
+[alacritty/dot-config/alacritty/themes/catppuccin-*]
+indent_size = unset
+
+[gtk/dot-local/share/themes/catppuccin-*/**]
+indent_size = unset
+
+[wofi/dot-config/wofi/style.css]
+indent_size = unset

@@ -1,0 +1,5 @@
+gui:
+  shortTimeFormat: "14:00"
+git:
+  commit:
+    signOff: true
