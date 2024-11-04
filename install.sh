@@ -110,8 +110,9 @@ then
     rm -rf "${XDG_PICTURES_DIR}/screenshots"
 fi
 
-# Initializing tmux
+# TODO: init fisher
 
+# Initialising tmux
 echo "-> Setting up tmux plugin manager"
 if [[ ! -d "${target}/.config/tmux/plugins/tpm" ]];
 then
