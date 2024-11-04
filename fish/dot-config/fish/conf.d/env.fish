@@ -27,6 +27,10 @@ if command -sq zoxide
     alias cd="z"
 end
 
+if command -sq bat
+    alias cat="bat --paging=never"
+end
+
 if test 'uname = Linux'
     set -x -g QT_QPA_PLATFORM wayland
     set -x -g QT_QPA_PLATFORMTHEME qt6ct
