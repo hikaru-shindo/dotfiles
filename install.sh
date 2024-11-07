@@ -59,6 +59,7 @@ modules=(
     kitty
     nvim
     tmux
+    wezterm
 )
 
 if [[ $(uname) == "Darwin" ]];
