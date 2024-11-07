@@ -3,7 +3,7 @@
 set -euo pipefail
 
 # settings
-gtk_theme="catppuccin-macchiato-blue-standard+default"
+gtk_theme="catppuccin-mocha-blue-standard+default"
 
 source=$(dirname "$(realpath "$0")")
 target=$(realpath "${1:-"$HOME"}")

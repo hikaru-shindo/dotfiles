@@ -1,6 +1,6 @@
 k9s:
   ui:
-    skin: catppuccin-macchiato
+    skin: catppuccin-mocha
   shellPod:
     image: nicolaka/netshoot:v0.13
     namespace: default

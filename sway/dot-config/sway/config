@@ -228,5 +228,5 @@ exec --no-startup-id blueman-applet
 exec --no-startup-id nm-applet --indicator
 exec --no-startup-id exec mako --config ~/.config/mako/mako.conf
 
-include ~/.config/sway/themes/catppuccin-macchiato.conf
+include ~/.config/sway/themes/catppuccin-mocha.conf
 include /etc/sway/config.d/*
