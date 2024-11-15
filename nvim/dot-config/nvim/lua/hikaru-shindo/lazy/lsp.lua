@@ -43,6 +43,7 @@ return {
                 "yamlls",
                 "gopls",
                 "flux_lsp",
+                "zls",
             },
             handlers = {
                 function(server_name) -- default handler (optional)
