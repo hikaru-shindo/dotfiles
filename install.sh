@@ -77,6 +77,7 @@ then
         gtk
         qt
         sway
+        hypr
         mako
         waybar
         wofi
