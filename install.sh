@@ -81,6 +81,7 @@ then
         mako
         waybar
         wofi
+        rofi
     )
 fi
 
