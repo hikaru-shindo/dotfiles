@@ -51,15 +51,16 @@ function link_gtk {
 
 modules=(
     alacritty
+    ghostty
+    kitty
+    wezterm
     fish
     k9s
     lazygit
     btop
     git
-    kitty
     nvim
     tmux
-    wezterm
 )
 
 if [[ $(uname) == "Darwin" ]];
