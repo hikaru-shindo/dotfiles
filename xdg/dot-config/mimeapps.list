@@ -1,26 +1,26 @@
 [Default Applications]
 x-scheme-handler/jetbrains=jetbrains-toolbox.desktop
-text/html=zen-alpha.desktop
-x-scheme-handler/http=zen-alpha.desktop
-x-scheme-handler/https=zen-alpha.desktop
+text/html=zen-beta.desktop
+x-scheme-handler/http=zen-beta.desktop
+x-scheme-handler/https=zen-beta.desktop
 x-scheme-handler/about=firefox-developer-edition.desktop
 x-scheme-handler/unknown=firefox-developer-edition.desktop
-x-scheme-handler/chrome=zen-alpha.desktop
-application/x-extension-htm=zen-alpha.desktop
-application/x-extension-html=zen-alpha.desktop
-application/x-extension-shtml=zen-alpha.desktop
-application/xhtml+xml=zen-alpha.desktop
-application/x-extension-xhtml=zen-alpha.desktop
-application/x-extension-xht=zen-alpha.desktop
+x-scheme-handler/chrome=zen-beta.desktop
+application/x-extension-htm=zen-beta.desktop
+application/x-extension-html=zen-beta.desktop
+application/x-extension-shtml=zen-beta.desktop
+application/xhtml+xml=zen-beta.desktop
+application/x-extension-xhtml=zen-beta.desktop
+application/x-extension-xht=zen-beta.desktop
 
 [Added Associations]
-x-scheme-handler/http=zen-alpha.desktop;
-x-scheme-handler/https=zen-alpha.desktop;
-x-scheme-handler/chrome=zen-alpha.desktop;
-text/html=zen-alpha.desktop;
-application/x-extension-htm=zen-alpha.desktop;
-application/x-extension-html=zen-alpha.desktop;
-application/x-extension-shtml=zen-alpha.desktop;
-application/xhtml+xml=zen-alpha.desktop;
-application/x-extension-xhtml=zen-alpha.desktop;
-application/x-extension-xht=zen-alpha.desktop;
+x-scheme-handler/http=zen-beta.desktop;
+x-scheme-handler/https=zen-beta.desktop;
+x-scheme-handler/chrome=zen-beta.desktop;
+text/html=zen-beta.desktop;
+application/x-extension-htm=zen-beta.desktop;
+application/x-extension-html=zen-beta.desktop;
+application/x-extension-shtml=zen-beta.desktop;
+application/xhtml+xml=zen-beta.desktop;
+application/x-extension-xhtml=zen-beta.desktop;
+application/x-extension-xht=zen-beta.desktop;
