@@ -45,8 +45,8 @@
     },
     "clock": {
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "format-alt": " {:%d/%m/%Y}",
-        "format": " {:%H:%M}",
+        "format-alt": "󰃭 {:%d/%m/%Y}",
+        "format": "󰥔 {:%H:%M}",
         "locale": "en_GB.UTF8",
     },
     "battery": {
@@ -55,10 +55,10 @@
             "critical": 15
         },
         "format": "{icon} {capacity}%",
-        "format-charging": " {capacity}%",
-        "format-plugged": " {capacity}%",
+        "format-charging": "󰂄 {capacity}%",
+        "format-plugged": "󰚥 {capacity}%",
         "format-alt": "{icon}",
-        "format-icons": ["", "",  "", "", "", "", "", "", "", "", "", ""]
+        "format-icons": ["󰂎", "󱊡", "󱊢", "󱊣"]
     },
     "pulseaudio": {
         // "scroll-step": 1, // %, can be a float
@@ -71,12 +71,12 @@
     },
     "custom/lock": {
         "tooltip": false,
-        "on-click": "sh -c '(sleep 0.5s; swaylock --grace 0)' & disown",
+        "on-click": "sh -c '(sleep 0.5s; hyprlock --immediate)' & disown",
         "format": "",
     },
     "custom/power": {
         "tooltip": false,
         "on-click": "wlogout &",
-        "format": "襤"
+        "format": "󰐥"
     }
 }
