@@ -142,6 +142,18 @@ fi
 echo "-> Updating kubectl aliases"
 curl -o "${target}/.config/fish/conf.d/kubectl_aliases.fish" https://raw.githubusercontent.com/ahmetb/kubectl-aliases/master/.kubectl_aliases.fish
 
+if [[ $(command -v flatpak) ]];
+then
+    echo "-> Configuring flatpak"
+    flatpak remote-add --if-not-exists --user flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+    # This seems not to work properly at the moment but I'll keep it here for the
+    # time being
+    flatpak override --user --filesystem="${target}/.config/gtk-3.0"
+    flatpak override --user --filesystem="${target}/.config/gtk-4.0"
+    flatpak override --user --filesystem="${target}/.local/share/themes"
+    flatpak override --user --filesystem="${source}/gtk"
+fi
+
 if [[ $(uname) == "Linux" ]];
 then
     echo "-> Configuring GTK themes"
