@@ -43,6 +43,7 @@
 #clock,
 #battery,
 #pulseaudio,
+#custom-notification,
 #custom-lock,
 #custom-power {
     background-color: @surface0;
@@ -66,6 +67,10 @@
 
 #battery.warning:not(.charging) {
     color: @red;
+}
+
+#custom-notification {
+    color: @teal;
 }
 
 #backlight {
