@@ -143,6 +143,19 @@ fi
 echo "-> Updating kubectl aliases"
 curl -o "${target}/.config/fish/conf.d/kubectl_aliases.fish" https://raw.githubusercontent.com/ahmetb/kubectl-aliases/master/.kubectl_aliases.fish
 
+if [[ $(uname) == "Linux" ]];
+then
+    echo "-> Configuring GTK themes"
+    link_gtk "3.0"
+    link_gtk "4.0"
+fi
+
+if [[ $(command -v xdg-user-dirs-gtk-update) ]];
+then
+    echo "-> Updating GTK bookmarks"
+    xdg-user-dirs-gtk-update
+fi
+
 if [[ $(command -v flatpak) ]];
 then
     echo "-> Configuring flatpak"
@@ -153,11 +166,4 @@ then
     flatpak override --user --filesystem="${target}/.config/gtk-4.0"
     flatpak override --user --filesystem="${target}/.local/share/themes"
     flatpak override --user --filesystem="${source}/gtk"
-fi
-
-if [[ $(uname) == "Linux" ]];
-then
-    echo "-> Configuring GTK themes"
-    link_gtk "3.0"
-    link_gtk "4.0"
 fi
