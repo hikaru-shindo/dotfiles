@@ -52,7 +52,7 @@ style = "bold mauve"
 style = "bold lavender"
 
 [kubernetes]
-format = '[$symbol$context($namespace)]($style) '
+format = '[$symbol$context\(($namespace)\)]($style) '
 style = 'bold sky'
 disabled = false
 
