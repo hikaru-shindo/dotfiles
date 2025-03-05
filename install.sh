@@ -61,6 +61,7 @@ modules=(
     git
     nvim
     tmux
+    podman
 )
 
 if [[ $(uname) == "Darwin" ]];
