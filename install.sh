@@ -154,10 +154,17 @@ if [[ $(command -v flatpak) ]];
 then
     echo "-> Configuring flatpak"
     flatpak remote-add --if-not-exists --user flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-    # This seems not to work properly at the moment but I'll keep it here for the
-    # time being
+
+    echo "--> Configuring GTK themes"
     flatpak override --user --filesystem="xdg-config/gtk-3.0:ro"
     flatpak override --user --filesystem="xdg-config/gtk-4.0:ro"
     flatpak override --user --filesystem="xdg-data/themes:ro"
     flatpak override --user --filesystem="${source}/gtk:ro"
+
+    # Needs org.kde.KStyle.Kvantum installed but still does not work
+    # needs more investigation ...
+    echo "--> Configuring Qt themes"
+    flatpak override --user --filesystem="xdg-config/Kvantum:ro"
+    flatpak override --user --filesystem="${source}/qt:ro"
+    flatpak override --user --env=QT_STYLE_OVERRIDE=kvantum
 fi
