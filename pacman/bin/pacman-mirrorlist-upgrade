@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+if [[ ! $(command -v rankmirrors) ]];
+then
+    echo >&2 "rankmirrors is not installed. Aborting."
+    exit 1
+fi
+
+mirrorlist_url="https://archlinux.org/mirrorlist/?country=DE&protocol=https&ip_version=4&use_mirror_status=on"
+temp_file=$(mktemp)
+
+echo "-> Fetching current mirrorlist"
+curl -o "${temp_file}" -s "${mirrorlist_url}"
+
+echo "-> Cleaning up downloaded mirrorlist"
+sed -i 's:^\s*##.*$::g' "${temp_file}"
+sed -i 's:^#Server:Server:' "${temp_file}"
+
+echo "-> Updating mirrorlist with rankmirrors"
+rankmirrors -n 6 "${temp_file}" | sudo tee /etc/pacman.d/mirrorlist
+
+echo "-> Cleanup"
+rm "${temp_file}"

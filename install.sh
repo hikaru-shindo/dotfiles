@@ -81,6 +81,13 @@ then
     )
 fi
 
+if [[ $(command -v lsb_release) && $(lsb_release -is) == "Arch" ]];
+then
+    modules+=(
+        pacman
+    )
+fi
+
 for module in "${modules[@]}"
 do
     install_dotfiles "${module}"
