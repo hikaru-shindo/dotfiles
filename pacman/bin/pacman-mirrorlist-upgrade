@@ -2,6 +2,13 @@
 
 set -euo pipefail
 
+mirror_count=${1:-10}
+
+if ! [[ "${mirror_count}" == +([0-9]) ]]; then
+    echo "usage: pacman-mirrorlist-upgrade (<mirror-count>)" >&2
+    exit 1
+fi
+
 if [[ ! $(command -v rankmirrors) ]];
 then
     echo >&2 "rankmirrors is not installed. Aborting."
@@ -19,7 +26,7 @@ sed -i 's:^\s*##.*$::g' "${temp_file}"
 sed -i 's:^#Server:Server:' "${temp_file}"
 
 echo "-> Updating mirrorlist with rankmirrors"
-rankmirrors -n 6 "${temp_file}" | sudo tee /etc/pacman.d/mirrorlist
+rankmirrors -n ${mirror_count} "${temp_file}" | sudo tee /etc/pacman.d/mirrorlist
 
 echo "-> Cleanup"
 rm "${temp_file}"
