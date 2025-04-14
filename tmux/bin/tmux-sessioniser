@@ -27,8 +27,8 @@ hydrate() {
         tmux send-keys -t $1 "source $HOME/.tmux-sessionizer" c-M
     else
         tmux send-keys -t $selected_name "nvim $selected" c-M
-        tmux new-window -t $selected_name
-        tmux new-window -t $selected_name
+        tmux new-window -t $selected_name -c $selected
+        tmux new-window -t $selected_name -c $selected
         tmux select-window -t ${selected_name}:1
     fi
 }
