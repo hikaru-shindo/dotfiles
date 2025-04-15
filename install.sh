@@ -54,6 +54,7 @@ modules=(
     git
     nvim
     tmux
+    zellij
     podman
 )
 

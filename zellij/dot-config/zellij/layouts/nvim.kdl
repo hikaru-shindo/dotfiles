@@ -1,0 +1,25 @@
+// This layout will create the default panes for my nvim workflow
+
+layout {
+    default_tab_template {
+        pane size=1 borderless=true {
+            plugin location="zellij:tab-bar"
+        }
+        children
+        pane size=2 borderless=true {
+            plugin location="zellij:status-bar"
+        }
+    }
+    tab name="nvim" {
+        pane command="nvim" {
+            args "."
+            focus true
+        }
+    }
+    tab name="CLI #1" {
+        pane
+    }
+    tab name="CLI #2" {
+        pane
+    }
+}
