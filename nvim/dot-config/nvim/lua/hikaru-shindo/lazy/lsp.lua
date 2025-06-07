@@ -42,7 +42,6 @@ return {
                 "gitlab_ci_ls",
                 "yamlls",
                 "gopls",
-                "flux_lsp",
                 "zls",
             },
             handlers = {
