@@ -35,4 +35,5 @@ $aur_helper -S protonup-qt
 echo "-> Installing lutris"
 sudo pacman -S lutris
 
-echo "Done. Please install Proton-GE into lutris with protonup-qt!"
+echo
+echo "Done. Make sure Proton-GE and vlkd3d-proton are available to lutris with protonup-qt!"
