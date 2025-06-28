@@ -73,9 +73,11 @@ then
         gtk
         qt
         swaync
-        hypr
         waybar
         rofi
+        # Compositors
+        hypr
+        niri
     )
 fi
 
