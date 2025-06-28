@@ -72,12 +72,9 @@ then
         xdg
         gtk
         qt
-        sway
         swaync
         hypr
-        mako
         waybar
-        wofi
         rofi
     )
 fi
