@@ -18,7 +18,3 @@ end
 if command -sq lazygit
     abbr --add -g lg lazygit
 end
-
-if string match --quiet "xterm-kitty" $TERM
-    abbr --add -g ssh kitten ssh
-end
