@@ -149,6 +149,12 @@ then
     echo "-> Configuring GTK themes"
     link_gtk "3.0"
     link_gtk "4.0"
+
+    if [[ $(command -v gsettings) ]];
+    then
+        echo "--> Setting GTK to prefer dark themes"
+        gsettings set org.gnome.desktop.interface color-scheme "prefer-dark"
+    fi
 fi
 
 if [[ $(command -v xdg-user-dirs-gtk-update) ]];
