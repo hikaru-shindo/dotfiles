@@ -42,28 +42,6 @@ function link_gtk {
     ln -sf "${HOME}/.local/share/themes/${gtk_theme}/gtk-${version}/assets" "${HOME}/.config/gtk-${version}/assets"
 }
 
-# Define Mime defaults
-#
-# As a lot of applications just overide the mimeapps.list
-# file and ignore the symlink, this solution does not
-# assume ownership of this file for the dotfiles repo.
-#
-# This however needs to be refactored - this approach in
-# this script is not really scalable.
-declare -A mime_types
-
-# Default browser
-mime_types["text/html"]="zen.desktop"
-mime_types["x-scheme-handler/http"]="zen.desktop"
-mime_types["x-scheme-handler/https"]="zen.desktop"
-mime_types["x-scheme-handler/chrome"]="zen.desktop"
-mime_types["application/x-extension-htm"]="zen.desktop"
-mime_types["application/x-extension-html"]="zen.desktop"
-mime_types["application/x-extension-shtml"]="zen.desktop"
-mime_types["application/x-extension-xhtml"]="zen.desktop"
-mime_types["application/x-extension-xht"]="zen.desktop"
-mime_types["application/xhtml+xml"]="zen.desktop"
-
 modules=(
     alacritty
     ghostty
@@ -101,6 +79,28 @@ then
         hypr
         niri
     )
+
+    # Define Mime defaults
+    #
+    # As a lot of applications just overide the mimeapps.list
+    # file and ignore the symlink, this solution does not
+    # assume ownership of this file for the dotfiles repo.
+    #
+    # This however needs to be refactored - this approach in
+    # this script is not really scalable.
+    declare -A mime_types
+
+    # Default browser
+    mime_types["text/html"]="zen.desktop"
+    mime_types["x-scheme-handler/http"]="zen.desktop"
+    mime_types["x-scheme-handler/https"]="zen.desktop"
+    mime_types["x-scheme-handler/chrome"]="zen.desktop"
+    mime_types["application/x-extension-htm"]="zen.desktop"
+    mime_types["application/x-extension-html"]="zen.desktop"
+    mime_types["application/x-extension-shtml"]="zen.desktop"
+    mime_types["application/x-extension-xhtml"]="zen.desktop"
+    mime_types["application/x-extension-xht"]="zen.desktop"
+    mime_types["application/xhtml+xml"]="zen.desktop"
 fi
 
 if [[ $(command -v lsb_release) && $(lsb_release -is) == "Arch" ]];
