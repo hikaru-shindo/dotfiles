@@ -10,7 +10,7 @@
   "display": {
     "separator": "",
     "key": {
-      "width": 3
+      "width": 4
     },
     "size": {
       "maxPrefix": "MB",
@@ -21,42 +21,42 @@
     "title",
     {
       "type": "os",
-      "key": "󰌢",
+      "key": "󰌢 ",
       "format": "{name} {version}"
     },
     {
       "type": "kernel",
-      "key": "󰞸",
+      "key": "󰞸 ",
       "format": "{release}"
     },
     {
       "type": "cpu",
-      "key": "",
+      "key": " ",
       "temp": true,
       "format": "{name} ({temperature})"
     },
     {
       "type": "memory",
-      "key": "",
+      "key": " ",
       "format": "{used}/{total} ({percentage})"
     },
     {
       "type": "gpu",
-      "key": "󰍹",
+      "key": "󰍹 ",
       "temp": true,
       "format": "{name} [{type}] ({temperature})"
     },
     {
       "type": "uptime",
-      "key": "󰅶"
+      "key": "󰅶 "
     },
     {
       "type": "battery",
-      "key": "󱐋"
+      "key": "󱐋 "
     },
     {
       "type": "localip",
-      "key": "󱂇"
+      "key": "󱂇 "
     }
   ],
 }
