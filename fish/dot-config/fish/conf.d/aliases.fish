@@ -18,3 +18,7 @@ end
 if command -sq lazygit
     abbr --add -g lg lazygit
 end
+
+if command -sq go-task
+    alias task=go-task
+end
