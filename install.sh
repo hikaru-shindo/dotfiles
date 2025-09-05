@@ -49,6 +49,7 @@ modules=(
     wezterm
     fish
     k9s
+    kubeswitch
     lazygit
     btop
     git
