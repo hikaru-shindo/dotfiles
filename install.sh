@@ -92,6 +92,7 @@ then
     declare -A mime_types
 
     # Default browser
+    mime_types["inode/directory"]="org.gnome.Nautilus.desktop"
     mime_types["text/html"]="zen.desktop"
     mime_types["x-scheme-handler/http"]="zen.desktop"
     mime_types["x-scheme-handler/https"]="zen.desktop"
