@@ -1,18 +1,20 @@
 #!/bin/bash
-
 set -euo pipefail
+
+# This script uses rofi and cliphist to selected and directly paste the
+# selected entry instead of just putting it into the clipboard buffer, so
+# you do not need to press CTRL+V afterwards.
 
 list_command="${1:-rofi -dmenu -display-columns 2 -p Clipboard}"
 
 selected_entry=$(cliphist list | ${list_command} | cliphist decode)
 
-if [ -n "$selected_entry" ]; then
-    echo -n "$selected_entry" | wl-copy
+# Exit 0 if nothing is selected
+[ -z "$selected_entry" ] && exit 0
 
-    # Small delay to ensure the clipboard is updated before "pasting"
-    sleep 0.1
+echo -n "$selected_entry" | wl-copy
 
-    # Simulate Ctrl+V to paste the content into the active window
-    # Just running wl-paste is unfortunately not enough
-    wtype -M ctrl v
-fi
+# Small delay to ensure the clipboard is populated before "pasting"
+sleep 0.1
+
+hyprctl dispatch sendshortcut "CTRL,V,"
