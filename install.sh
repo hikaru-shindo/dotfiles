@@ -76,6 +76,7 @@ then
         swaync
         waybar
         rofi
+        cliphist
         # Compositors
         hypr
         niri
