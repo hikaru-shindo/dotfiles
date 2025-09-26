@@ -10,6 +10,7 @@ configuration{
     display-drun: "   Apps ";
     display-run: "   Run ";
     display-window: " 󰕰  Window";
+    display-calc: "  Calculator";
     display-Network: " 󰤨  Network";
     sidebar-mode: true;
 }
