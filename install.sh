@@ -142,20 +142,26 @@ fi
 
 # TODO: init fisher
 
-# Initialising tmux
-echo "-> Setting up tmux plugin manager"
-if [[ ! -d "${HOME}/.config/tmux/plugins/tpm" ]];
+if [[ $(command -v tmux) ]];
 then
-    echo "-> Ensuring tmux plugins directory"
-    create_directory "${HOME}/.config/tmux/plugins"
-    echo "-> Installing tmux plugin manager"
-    git clone https://github.com/tmux-plugins/tpm "${HOME}/.config/tmux/plugins/tpm"
+    # Initialising tmux
+    echo "-> Setting up tmux plugin manager"
+    if [[ ! -d "${HOME}/.config/tmux/plugins/tpm" ]];
+    then
+        echo "-> Ensuring tmux plugins directory"
+        create_directory "${HOME}/.config/tmux/plugins"
+        echo "-> Installing tmux plugin manager"
+        git clone https://github.com/tmux-plugins/tpm "${HOME}/.config/tmux/plugins/tpm"
+    else
+        echo "-> Updating tmux plugin manager"
+        git -C "${HOME}/.config/tmux/plugins/tpm" pull --rebase
+    fi
+
+    "${HOME}/.config/tmux/plugins/tpm/scripts/install_plugins.sh"
 else
-    echo "-> Updating tmux plugin manager"
-    git -C "${HOME}/.config/tmux/plugins/tpm" pull --rebase
+    echo "-> No tmux installed, skipping tmux plugin manager setup"
 fi
 
-"${HOME}/.config/tmux/plugins/tpm/scripts/install_plugins.sh"
 
 # Initialize neovim
 if [[ $(command -v nvim) ]];
