@@ -4,7 +4,7 @@
 [user]
     name = Pascal Nitsche
     email = saikootau@gmail.com
-    signingkey = FEE503327D63D8D3
+    signingkey = 573E3EDC5A1C02B5
 
 [color]
     ui = true
