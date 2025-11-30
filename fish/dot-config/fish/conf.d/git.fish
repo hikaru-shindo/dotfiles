@@ -3,6 +3,7 @@
 abbr --add -g gco -- git checkout
 abbr --add -g gsw -- git switch
 abbr --add -g gswc -- git switch --create
+abbr --add -g gswm -- git switch main
 abbr --add -g ga -- git add
 abbr --add -g gaa -- git add --all
 abbr --add -g gapa -- git add --patch
@@ -24,7 +25,11 @@ abbr --add -g grb -- git rebase
 abbr --add -g grba -- git rebase --abort
 abbr --add -g grbc -- git rebase --continue
 abbr --add -g grbi -- git rebase --interactive
+abbr --add -g grbis -- git rebase --interactive --gpg-sign
 abbr --add -g grbs -- git rebase --skip
+abbr --add -g grbss -- git rebase --gpg-sign
+abbr --add -g grbom -- git rebase origin/main
+abbr --add -g grboms -- git rebase origin/main --gpg-sign
 abbr --add -g gss -- git status --short
 abbr --add -g gsb -- git status --short --branch
 abbr --add -g grh -- git reset
