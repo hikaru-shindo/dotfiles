@@ -1,8 +1,9 @@
 k9s:
   ui:
     skin: catppuccin-mocha
+    splashless: true
   shellPod:
-    image: nicolaka/netshoot:v0.13
+    image: nicolaka/netshoot:v0.14
     namespace: default
     limits:
       cpu: 100m
