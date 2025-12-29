@@ -4,7 +4,7 @@
 fish_hybrid_key_bindings
 
 fish_add_path -ga /usr/local/sbin
-fish_add_path -gp {$HOME}/bin
+fish_add_path -gp {$HOME}/.local/bin
 
 if test -x (command -v most)
     set -x -g PAGER most
