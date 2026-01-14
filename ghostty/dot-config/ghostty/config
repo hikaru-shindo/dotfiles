@@ -4,3 +4,5 @@ font-family-bold = "JetbrainsMono NFM ExtraBold"
 font-family-italic = "JetbrainsMono NFM Italic"
 font-family-bold-italic = "JetbrainsMono NFM ExtraBold Italic"
 font-size = 14
+
+shell-integration-features = ssh-env,ssh-terminfo
