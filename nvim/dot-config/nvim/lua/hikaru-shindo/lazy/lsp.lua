@@ -1,7 +1,7 @@
 return {
     "neovim/nvim-lspconfig",
 
-    tag = "v2.4.0",
+    tag = "v2.7.0",
 
     dependencies = {
         "stevearc/conform.nvim",
