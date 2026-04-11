@@ -117,6 +117,9 @@ then
     mime_types["application/x-extension-xhtml"]="zen.desktop"
     mime_types["application/x-extension-xht"]="zen.desktop"
     mime_types["application/xhtml+xml"]="zen.desktop"
+
+    # Windows executable
+    mime_types["application/vnd.microsoft.portable-executable"]="wine.desktop"
 fi
 
 if [[ $(command -v lsb_release) && $(lsb_release -is) == "Arch" ]];
