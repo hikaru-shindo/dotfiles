@@ -15,10 +15,15 @@ fi
 echo "Using source: ${source}"
 echo "Using target: ${HOME}"
 
+function exec {
+    echo "[info] ${@}"
+    command "${@}"
+}
+
 function install_dotfiles {
     local module=$1
     echo "-> Stowing module ${module}"
-    stow --verbose --no-folding --dotfiles --target "${HOME}" -S "${module}"
+    exec stow --verbose --no-folding --dotfiles --target "${HOME}" -S "${module}"
 }
 
 function create_directory {
@@ -26,9 +31,28 @@ function create_directory {
     if [[ ! -d "${directory}" ]];
     then
         echo "-> Creating directory ${directory}"
-        mkdir -p "${directory}"
+        exec mkdir -p "${directory}"
     else
         echo "-> ${directory} already exists. Skipping."
+    fi
+}
+
+function gsettings_set {
+    local group="$1"
+    local key="$2"
+    local value="${3:-}"
+
+    if [[ -z "${group}" || -z "${key}" ]];
+    then
+        echo "[err] invalid gsettings group or key group=${group} key=${key}"
+        return 1
+    fi
+
+    if [[ ! -z "${value}" ]];
+    then
+        exec gsettings set "${group}" "${key}" "${value}"
+    else
+        exec gsettings reset "${group}" "${key}"
     fi
 }
 
@@ -125,9 +149,9 @@ create_directory "${XDG_PUBLICSHARE_DIR}"
 if [[ -d "${XDG_PICTURES_DIR}/screenshots" ]];
 then
     echo "-> Migrating screenshots to new home ${XDG_SCREENSHOT_DIR}"
-    mv "${XDG_PICTURES_DIR}/screenshots/"* "${XDG_SCREENSHOT_DIR}"
+    exec mv "${XDG_PICTURES_DIR}/screenshots/"* "${XDG_SCREENSHOT_DIR}"
     echo "-> Removing old screenshot dir ${XDG_PICTURES_DIR}/screenshots"
-    rm -rf "${XDG_PICTURES_DIR}/screenshots"
+    exec rm -rf "${XDG_PICTURES_DIR}/screenshots"
 fi
 
 # TODO: init fisher
@@ -139,12 +163,12 @@ then
     if [[ ! -d "${HOME}/.config/tmux/plugins/tpm" ]];
     then
         echo "-> Ensuring tmux plugins directory"
-        create_directory "${HOME}/.config/tmux/plugins"
+        exec create_directory "${HOME}/.config/tmux/plugins"
         echo "-> Installing tmux plugin manager"
-        git clone https://github.com/tmux-plugins/tpm "${HOME}/.config/tmux/plugins/tpm"
+        exec git clone https://github.com/tmux-plugins/tpm "${HOME}/.config/tmux/plugins/tpm"
     else
         echo "-> Updating tmux plugin manager"
-        git -C "${HOME}/.config/tmux/plugins/tpm" pull --rebase
+        exec git -C "${HOME}/.config/tmux/plugins/tpm" pull --rebase
     fi
 
     "${HOME}/.config/tmux/plugins/tpm/scripts/install_plugins.sh"
@@ -157,52 +181,69 @@ fi
 if [[ $(command -v nvim) ]];
 then
     echo "-> Updating neovim plugins"
-    nvim --headless '+Lazy! sync' +qall || true
+    exec nvim --headless '+Lazy! sync' +qall || true
 fi
 
 # Initialize kubectl_aliases
 echo "-> Updating kubectl aliases"
-curl -o "${HOME}/.config/fish/conf.d/kubectl_aliases.fish" https://raw.githubusercontent.com/ahmetb/kubectl-aliases/master/.kubectl_aliases.fish
+exec curl -o "${HOME}/.config/fish/conf.d/kubectl_aliases.fish" https://raw.githubusercontent.com/ahmetb/kubectl-aliases/master/.kubectl_aliases.fish
 
 if [[ $(uname) == "Linux" ]];
 then
+    echo "-> Cofiguring dconf"
     if [[ $(command -v gsettings) ]];
     then
-        echo "--> Setting GTK to prefer dark themes"
-        gsettings set org.gnome.desktop.interface color-scheme "prefer-dark"
+        echo "--> Setting GNOME settings"
+        gsettings_set org.gnome.desktop.interface color-scheme prefer-dark
+        echo "--> Setting Nemo preferences"
+        gsettings_set org.cinnamon.desktop.default-applications.terminal exec kitty # use kitty as default terminal
+        gsettings_set org.nemo.preferences size-prefixes base-2 # use binary prefixes
+        gsettings_set org.nemo.preferences date-format iso # use iso dates
+        gsettings_set org.nemo.preferences show-location-entry true # show file path on top
+        gsettings_set org.nemo.preferences show-advanced-permissions true # expert mode :)
+        gsettings_set org.nemo.preferences sort-directories-first true # dis first :)
+        gsettings_set org.nemo.preferences executable-text-activation launch # launch executable scripts by default
+        gsettings_set org.nemo.preferences show-image-thumbnails always # always show thumbnails
+        gsettings_set org.nemo.preferences thumbnail-limit 30 # max size for thumbnail creation in MiB
+        # some toolbar stuff
+        gsettings_set org.nemo.preferences show-computer-icon-toolbar false
+        gsettings_set org.nemo.preferences show-home-icon-toolbar true
+        gsettings_set org.nemo.preferences show-up-icon-toolbar true
+        gsettings_set org.nemo.preferences show-reload-icon-toolbar false
+    else
+        echo "--> [warn] gsettings not installed, skipping"
     fi
 fi
 
 if [[ $(command -v xdg-user-dirs-gtk-update) ]];
 then
     echo "-> Updating GTK bookmarks"
-    xdg-user-dirs-gtk-update
+    exec xdg-user-dirs-gtk-update
 fi
 
 if [[ $(command -v flatpak) ]];
 then
     echo "-> Configuring flatpak"
-    flatpak remote-add --if-not-exists --user flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+    exec flatpak remote-add --if-not-exists --user flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 
     echo "--> Configuring GTK themes"
-    flatpak override --user --filesystem="xdg-config/gtk-3.0:ro"
-    flatpak override --user --filesystem="xdg-config/gtk-4.0:ro"
-    flatpak override --user --filesystem="xdg-data/themes:ro"
-    flatpak override --user --filesystem="${source}/gtk:ro"
+    exec flatpak override --user --filesystem="xdg-config/gtk-3.0:ro"
+    exec flatpak override --user --filesystem="xdg-config/gtk-4.0:ro"
+    exec flatpak override --user --filesystem="xdg-data/themes:ro"
+    exec flatpak override --user --filesystem="${source}/gtk:ro"
 
     # Needs org.kde.KStyle.Kvantum installed but still does not work
     # needs more investigation ...
     echo "--> Configuring Qt themes"
-    flatpak override --user --filesystem="xdg-config/Kvantum:ro"
-    flatpak override --user --filesystem="${source}/qt:ro"
-    flatpak override --user --env=QT_STYLE_OVERRIDE=kvantum
+    exec flatpak override --user --filesystem="xdg-config/Kvantum:ro"
+    exec flatpak override --user --filesystem="${source}/qt:ro"
+    exec flatpak override --user --env=QT_STYLE_OVERRIDE=kvantum
 fi
 
 if [[ $(command -v xdg-mime) ]];
 then
     echo "-> Setting XDG default applications"
     for mime in "${!mime_types[@]}"; do
-        echo "--> Setting ${mime} to ${mime_types[${mime}]}"
-        xdg-mime default "${mime_types[${mime}]}" "${mime}"
+        exec xdg-mime default "${mime_types[${mime}]}" "${mime}"
     done
 fi
