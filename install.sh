@@ -2,9 +2,6 @@
 
 set -euo pipefail
 
-# settings
-gtk_theme="catppuccin-mocha-blue-standard+default"
-
 source=$(dirname "$(realpath "$0")")
 
 # TODO: This needs heavy refactoring but works for testing :)
@@ -33,13 +30,6 @@ function create_directory {
     else
         echo "-> ${directory} already exists. Skipping."
     fi
-}
-
-function link_gtk {
-    local version=$1
-    ln -sf "${HOME}/.local/share/themes/${gtk_theme}/gtk-${version}/gtk.css" "${HOME}/.config/gtk-${version}/gtk.css"
-    ln -sf "${HOME}/.local/share/themes/${gtk_theme}/gtk-${version}/gtk-dark.css" "${HOME}/.config/gtk-${version}/gtk-dark.css"
-    ln -sf "${HOME}/.local/share/themes/${gtk_theme}/gtk-${version}/assets" "${HOME}/.config/gtk-${version}/assets"
 }
 
 modules=(
@@ -176,10 +166,6 @@ curl -o "${HOME}/.config/fish/conf.d/kubectl_aliases.fish" https://raw.githubuse
 
 if [[ $(uname) == "Linux" ]];
 then
-    echo "-> Configuring GTK themes"
-    link_gtk "3.0"
-    link_gtk "4.0"
-
     if [[ $(command -v gsettings) ]];
     then
         echo "--> Setting GTK to prefer dark themes"
