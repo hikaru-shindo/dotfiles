@@ -50,15 +50,14 @@ return {
             },
             handlers = {
                 function(server_name) -- default handler (optional)
-                    require("lspconfig")[server_name].setup {
+                    vim.lsp.config(server_name, {
                         capabilities = capabilities
-                    }
+                    })
                 end,
 
                 zls = function()
-                    local lspconfig = require("lspconfig")
-                    lspconfig.zls.setup({
-                        root_dir = lspconfig.util.root_pattern(".git", "build.zig", "zls.json"),
+                    vim.lsp.config("zls", {
+                        root_dir = vim.fs.root(0, {".git", "build.zig", "zls.json"}),
                         settings = {
                             zls = {
                                 enable_inlay_hints = true,
@@ -66,14 +65,14 @@ return {
                                 warn_style = true,
                             },
                         },
+
                     })
                     vim.g.zig_fmt_parse_errors = 0
                     vim.g.zig_fmt_autosave = 0
-
                 end,
+
                 ["lua_ls"] = function()
-                    local lspconfig = require("lspconfig")
-                    lspconfig.lua_ls.setup {
+                    vim.lsp.config("lua_ls",  {
                         capabilities = capabilities,
                         settings = {
                             Lua = {
@@ -88,7 +87,7 @@ return {
                                 },
                             }
                         }
-                    }
+                    })
                 end,
             }
         })
