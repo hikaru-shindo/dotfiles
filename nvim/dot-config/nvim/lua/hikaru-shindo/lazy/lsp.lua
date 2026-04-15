@@ -15,6 +15,11 @@ return {
         "L3MON4D3/LuaSnip",
         "saadparwaiz1/cmp_luasnip",
         "j-hui/fidget.nvim",
+        {
+            "qvalentin/helm-ls.nvim",
+            ft = "helm",
+            opts = {}
+        }
     },
 
     config = function()
@@ -57,7 +62,7 @@ return {
 
                 zls = function()
                     vim.lsp.config("zls", {
-                        root_dir = vim.fs.root(0, {".git", "build.zig", "zls.json"}),
+                        root_dir = vim.fs.root(0, { ".git", "build.zig", "zls.json" }),
                         settings = {
                             zls = {
                                 enable_inlay_hints = true,
@@ -71,8 +76,20 @@ return {
                     vim.g.zig_fmt_autosave = 0
                 end,
 
+                ["helm_ls"] = function()
+                    vim.lsp.config("helm_ls", {
+                        settings = {
+                            ["helm-ls"] = {
+                                yamlls = {
+                                    path = "yaml-language-server",
+                                },
+                            },
+                        },
+                    })
+                end,
+
                 ["lua_ls"] = function()
-                    vim.lsp.config("lua_ls",  {
+                    vim.lsp.config("lua_ls", {
                         capabilities = capabilities,
                         settings = {
                             Lua = {

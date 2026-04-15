@@ -21,6 +21,7 @@ return {
             "dockerfile",
             "go",
             "hcl",
+            "helm",
             "http",
             "javascript",
             "jsdoc",
