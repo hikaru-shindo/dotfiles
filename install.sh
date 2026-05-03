@@ -12,17 +12,45 @@ then
     exit 1
 fi
 
-echo "Using source: ${source}"
-echo "Using target: ${HOME}"
+function log {
+    local level=$1
+    local message="${*:2}"
+
+    local colour_reset='\033[0m'
+    local colour
+
+    case "$level" in
+        debug)
+            colour='\033[90m'
+        ;;
+        warn)
+            colour='\033[33m'  # Orange/Yellow
+        ;;
+        error)
+            colour='\033[31m'  # Red
+        ;;
+        *)
+            colour='\033[36m'  # Light grey (default/info)
+        ;;
+    esac
+
+    echo -e "${colour}[${level}] ${message}${colour_reset}"
+}
 
 function exec {
-    echo "[info] ${@}"
+    log debug "${@}"
     command "${@}"
+    return $?
+}
+
+function exec_silent {
+    log debug "${@}"
+    command "${@}" > /dev/null
+    return $?
 }
 
 function install_dotfiles {
     local module=$1
-    echo "-> Stowing module ${module}"
     exec stow --verbose --no-folding --dotfiles --target "${HOME}" -S "${module}"
 }
 
@@ -30,10 +58,9 @@ function create_directory {
     local directory=$1
     if [[ ! -d "${directory}" ]];
     then
-        echo "-> Creating directory ${directory}"
         exec mkdir -p "${directory}"
     else
-        echo "-> ${directory} already exists. Skipping."
+        log debug "${directory} already exists. Skipping."
     fi
 }
 
@@ -44,7 +71,7 @@ function gsettings_set {
 
     if [[ -z "${group}" || -z "${key}" ]];
     then
-        echo "[err] invalid gsettings group or key group=${group} key=${key}"
+        log error "invalid gsettings group or key group=${group} key=${key}"
         return 1
     fi
 
@@ -55,6 +82,9 @@ function gsettings_set {
         exec gsettings reset "${group}" "${key}"
     fi
 }
+
+log debug "Using source: ${source}"
+log debug "Using target: ${HOME}"
 
 modules=(
     alacritty
@@ -129,6 +159,7 @@ then
     )
 fi
 
+log info "Stowing dotfile modules"
 for module in "${modules[@]}"
 do
     install_dotfiles "${module}"
@@ -136,7 +167,7 @@ done
 
 # Setting up XDG_CONFIG_DIRS
 
-echo "-> Creating configuration directories"
+log info "Creating configuration directories"
 source "${source}/xdg/dot-config/user-dirs.dirs"
 create_directory "${XDG_DESKTOP_DIR}"
 create_directory "${XDG_DOCUMENTS_DIR}"
@@ -152,9 +183,9 @@ create_directory "${XDG_PUBLICSHARE_DIR}"
 # Migrate old screenshots
 if [[ -d "${XDG_PICTURES_DIR}/screenshots" ]];
 then
-    echo "-> Migrating screenshots to new home ${XDG_SCREENSHOT_DIR}"
+    log info "Migrating screenshots to new home ${XDG_SCREENSHOT_DIR}"
     exec mv "${XDG_PICTURES_DIR}/screenshots/"* "${XDG_SCREENSHOT_DIR}"
-    echo "-> Removing old screenshot dir ${XDG_PICTURES_DIR}/screenshots"
+    log info "Removing old screenshot dir ${XDG_PICTURES_DIR}/screenshots"
     exec rm -rf "${XDG_PICTURES_DIR}/screenshots"
 fi
 
@@ -163,43 +194,43 @@ fi
 if [[ $(command -v tmux) ]];
 then
     # Initialising tmux
-    echo "-> Setting up tmux plugin manager"
+    log info "Setting up tmux plugin manager"
     if [[ ! -d "${HOME}/.config/tmux/plugins/tpm" ]];
     then
-        echo "-> Ensuring tmux plugins directory"
-        exec create_directory "${HOME}/.config/tmux/plugins"
-        echo "-> Installing tmux plugin manager"
-        exec git clone https://github.com/tmux-plugins/tpm "${HOME}/.config/tmux/plugins/tpm"
+        log info "Ensuring tmux plugins directory"
+        create_directory "${HOME}/.config/tmux/plugins"
+        log info "Installing tmux plugin manager"
+        exec_silent git clone https://github.com/tmux-plugins/tpm "${HOME}/.config/tmux/plugins/tpm"
     else
-        echo "-> Updating tmux plugin manager"
-        exec git -C "${HOME}/.config/tmux/plugins/tpm" pull --rebase
+        log info "Updating tmux plugin manager"
+        exec_silent git -C "${HOME}/.config/tmux/plugins/tpm" pull --rebase
     fi
 
-    "${HOME}/.config/tmux/plugins/tpm/scripts/install_plugins.sh"
+    exec_silent "${HOME}/.config/tmux/plugins/tpm/scripts/install_plugins.sh"
 else
-    echo "-> No tmux installed, skipping tmux plugin manager setup"
+    log info "tmux not installed, skipping tmux plugin manager setup"
 fi
 
 
 # Initialize neovim
 if [[ $(command -v nvim) ]];
 then
-    echo "-> Updating neovim plugins"
-    exec nvim --headless '+Lazy! sync' +qall || true
+    log info "Updating neovim plugins"
+    exec_silent nvim --headless '+Lazy! sync' +qall || log error "nvim could not be initialised"
 fi
 
 # Initialize kubectl_aliases
-echo "-> Updating kubectl aliases"
-exec curl -o "${HOME}/.config/fish/conf.d/kubectl_aliases.fish" https://raw.githubusercontent.com/ahmetb/kubectl-aliases/master/.kubectl_aliases.fish
+log info "Updating kubectl aliases"
+exec curl --silent -o "${HOME}/.config/fish/conf.d/kubectl_aliases.fish" https://raw.githubusercontent.com/ahmetb/kubectl-aliases/master/.kubectl_aliases.fish || log error "could not update kubectl aliases"
 
 if [[ $(uname) == "Linux" ]];
 then
-    echo "-> Cofiguring dconf"
+    log info "Cofiguring dconf"
     if [[ $(command -v gsettings) ]];
     then
-        echo "--> Setting GNOME settings"
+        log info "Setting GNOME settings"
         gsettings_set org.gnome.desktop.interface color-scheme prefer-dark
-        echo "--> Setting Nemo preferences"
+        log info "Setting Nemo preferences"
         gsettings_set org.cinnamon.desktop.default-applications.terminal exec kitty # use kitty as default terminal
         gsettings_set org.nemo.preferences size-prefixes base-2 # use binary prefixes
         gsettings_set org.nemo.preferences date-format iso # use iso dates
@@ -215,22 +246,22 @@ then
         gsettings_set org.nemo.preferences show-up-icon-toolbar true
         gsettings_set org.nemo.preferences show-reload-icon-toolbar false
     else
-        echo "--> [warn] gsettings not installed, skipping"
+        log warn "gsettings not installed, skipping"
     fi
 fi
 
 if [[ $(command -v xdg-user-dirs-gtk-update) ]];
 then
-    echo "-> Updating GTK bookmarks"
+    log info "Updating GTK bookmarks"
     exec xdg-user-dirs-gtk-update
 fi
 
 if [[ $(command -v flatpak) ]];
 then
-    echo "-> Configuring flatpak"
+    log info "Configuring flatpak"
     exec flatpak remote-add --if-not-exists --user flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 
-    echo "--> Configuring GTK themes"
+    log info "Configuring flatpak GTK themes"
     exec flatpak override --user --filesystem="xdg-config/gtk-3.0:ro"
     exec flatpak override --user --filesystem="xdg-config/gtk-4.0:ro"
     exec flatpak override --user --filesystem="xdg-data/themes:ro"
@@ -238,7 +269,7 @@ then
 
     # Needs org.kde.KStyle.Kvantum installed but still does not work
     # needs more investigation ...
-    echo "--> Configuring Qt themes"
+    log info "Configuring flatpak Qt themes"
     exec flatpak override --user --filesystem="xdg-config/Kvantum:ro"
     exec flatpak override --user --filesystem="${source}/qt:ro"
     exec flatpak override --user --env=QT_STYLE_OVERRIDE=kvantum
@@ -246,7 +277,7 @@ fi
 
 if [[ $(command -v xdg-mime) ]];
 then
-    echo "-> Setting XDG default applications"
+    log info "Setting XDG default applications"
     for mime in "${!mime_types[@]}"; do
         exec xdg-mime default "${mime_types[${mime}]}" "${mime}"
     done
