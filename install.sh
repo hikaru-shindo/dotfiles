@@ -156,6 +156,7 @@ if [[ $(command -v lsb_release) && $(lsb_release -is) == "Arch" ]];
 then
     modules+=(
         pacman
+        paru
     )
 fi
 
