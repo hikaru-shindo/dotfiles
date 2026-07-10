@@ -29,7 +29,7 @@ if command -sq fzf
 end
 
 if command -sq eza
-    alias ls="eza --git --header --icons"
+    alias ls="eza --git --header --icons=always"
 end
 
 if command -sq zoxide
