@@ -2,12 +2,8 @@
 
 set -euo pipefail
 
-target=${1:-}
-if [[ -z "${target}" ]];
-then
-    echo >&2 "Usage: cleanup_broken_links <target_directory>"
-    exit 1
-fi
+source=$(dirname "$(realpath "$0")")
+target="${HOME}"
 
 if [[ ! -d "${target}" ]];
 then
@@ -15,22 +11,42 @@ then
     exit 2
 fi
 
-echo "The following links are broken: "
-echo
+echo "=> Target directory: ${target}"
+echo "=> Finding broken symlinks to dotfiles..."
+broken_links=()
+while IFS= read -r link; do
+    link_target=$(readlink "${link}")
 
-find "${target}" -type l ! -exec [ -e {} ] \; -print 2> /dev/null || true
+    # Resolve relative paths to absolute
+    if [[ "${link_target}" != /* ]]; then
+        # Relative path - resolve from link's directory
+        resolved_link=$(cd "$(dirname "${link}")" && readlink -m "${link_target}")
+    else
+        # Absolute path
+        resolved_link="${link_target}"
+    fi
 
-echo
-read -p "Ask for confirmation? [Yn] " confirmation
+    # Check if resolved path points to dotfiles
+    if [[ "${resolved_link}" == "${source}"* ]]; then
+        broken_links+=("${link}")
+    fi
+done < <(find "${target}" -xdev -type l 2>/dev/null)
 
-if [[ "${confirmation,,}" = "n" ]];
-then
-    echo "-> Deleting without confirmation"
-    find "${target}" -type l -type l ! -exec [ -e {} ] \; -exec rm {} \;
+if [[ ${#broken_links[@]} -gt 0 ]]; then
+    echo "The following broken symlinks will be removed:"
+    printf '  %s\n' "${broken_links[@]}"
+    echo
+    read -p "Continue? [yN] " -n 1 continue
+    echo
+    if [[ ! $continue =~ ^[Yy]$ ]]; then
+        echo "Aborted."
+        exit 0
+    fi
+
+    echo "=> Removing broken symlinks..."
+    for link in "${broken_links[@]}"; do
+        rm -v "${link}"
+    done
 else
-    echo "-> Deleting with confirmation"
-    find "${target}" -type l ! -exec [ -e {} ] \; -exec rm -i {} \;
+    echo "No broken symlinks found."
 fi
-
-echo
-echo "-> Done"
