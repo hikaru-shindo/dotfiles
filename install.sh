@@ -3,6 +3,7 @@
 set -euo pipefail
 
 source=$(dirname "$(realpath "$0")")
+modules_dir="${source}/modules"
 
 # TODO: This needs heavy refactoring but works for testing :)
 
@@ -51,7 +52,7 @@ function exec_silent {
 
 function install_dotfiles {
     local module=$1
-    exec stow --verbose --no-folding --dotfiles --target "${HOME}" -S "${module}"
+    exec stow --verbose --no-folding --dotfiles --target "${HOME}" --dir "${modules_dir}" -S "${module}"
 }
 
 function create_directory {
@@ -106,7 +107,6 @@ modules=(
 if [[ $(uname) == "Darwin" ]];
 then
     modules+=(
-        warp
         fish_darwin
     )
 fi
@@ -117,7 +117,6 @@ then
         xdg
         gtk
         qt
-        swaync
         waybar
         rofi
         # Compositors
@@ -169,7 +168,7 @@ done
 # Setting up XDG_CONFIG_DIRS
 
 log info "Creating configuration directories"
-source "${source}/xdg/dot-config/user-dirs.dirs"
+source "${modules_dir}/xdg/dot-config/user-dirs.dirs"
 create_directory "${XDG_DESKTOP_DIR}"
 create_directory "${XDG_DOCUMENTS_DIR}"
 create_directory "${XDG_DOWNLOAD_DIR}"
