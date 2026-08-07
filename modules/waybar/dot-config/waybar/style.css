@@ -37,6 +37,15 @@
     border-radius: 1rem;
 }
 
+#submap {
+    border-radius: 1rem;
+    margin: 5px;
+    padding: 0.5rem 1rem;
+    background-color: @surface0;
+    margin-left: 1rem;
+    color: @yellow;
+}
+
 #custom-music,
 #tray,
 #backlight,
