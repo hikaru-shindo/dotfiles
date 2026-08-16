@@ -178,6 +178,16 @@ hl.window_rule({
     },
 })
 
+-- Status windows
+hl.window_rule({
+    float = true,
+    center = true,
+
+    match = {
+        class = "org.gnome.FileRoller",
+        title = "Extract",
+    }
+})
 
 -- Tearing
 hl.window_rule({
