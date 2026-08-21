@@ -1,60 +1,57 @@
 #!/usr/bin/env bash
 
 switch_to() {
-    if [[ -z $TMUX ]]; then
-        tmux attach-session -t $1
-    else
-        tmux switch-client -t $1
-    fi
-}
+    local session_name="${1}"
 
-has_session() {
-    tmux list-sessions | grep -q "^$1:"
+    if [[ -z ${TMUX} ]]; then
+        tmux attach-session -t "${session_name}"
+    else
+        tmux switch-client -t "${session_name}"
+    fi
 }
 
 hydrate() {
-    selected_name=$1
-    selected=$2
+    local selected_name="${1}"
+    local selected="${2}"
 
     config_dir=$HOME/.config
-    if [ ! -z $XDG_CONFIG_HOME ]; then
-        config_dir=$XDG_CONFIG_HOME
+    if [ ! -z "${XDG_CONFIG_HOME}" ]; then
+        config_dir="${XDG_CONFIG_HOME}"
     fi
 
-    if [ -f $2/tmux-sessionizer ]; then
-        tmux send-keys -t $1 "source $2/.tmux-sessionizer" c-M
-    elif [ -f $/.tmux-sessionizer ]; then
-        tmux send-keys -t $1 "source $HOME/.tmux-sessionizer" c-M
+    if [ -f "${selected}/.tmux-sessioniser" ]; then
+        tmux send-keys -t "${selected_name}" "source ${selected}/.tmux-sessioniser" c-M
+    elif [ -f "${config_dir}/tmux-sessioniser/config" ]; then
+        tmux send-keys -t "${selected_name}" "source ${config_dir}/tmux-sessioniser/config" c-M
     else
-        tmux send-keys -t $selected_name "nvim $selected" c-M
-        tmux new-window -t $selected_name -c $selected
-        tmux new-window -t $selected_name -c $selected
-        tmux select-window -t ${selected_name}:1
+        tmux send-keys -t "${selected_name}" "nvim ${selected}" c-M
+        tmux new-window -t "${selected_name}" -c "${selected}"
+        tmux new-window -t "${selected_name}" -c "${selected}"
+        tmux select-window -t "${selected_name}:1"
     fi
 }
 
 if [[ $# -eq 1 ]]; then
-    selected=$1
+    selected="${1}"
 else
-    selected=$(find ~/Projects -mindepth 2 -maxdepth 6 -type d -name '.git' | sed -r 's|/[^/]+$||' | fzf)
+    if command -v xdg-user-dir >/dev/null 2>&1; then
+        project_dir="$(xdg-user-dir PROJECTS)"
+    else
+        project_dir="${HOME}/Projects"
+    fi
+
+    selected=$(find "${project_dir}" -mindepth 2 -maxdepth 6 -type d -name '.git' | sed -r 's|/[^/]+$||' | fzf)
 fi
 
-if [[ -z $selected ]]; then
+if [[ -z "${selected}" ]]; then
     exit 0
 fi
 
-selected_name=$(basename "$selected" | tr . _)
-tmux_running=$(pgrep tmux)
+selected_name=$(basename "${selected}" | tr . _)
 
-if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
-    tmux new-session -s $selected_name -c $selected
-    hydrate $selected_name $selected
-    exit 0
+if ! tmux has-session -t="${selected_name}" 2> /dev/null; then
+    tmux new-session -ds "${selected_name}" -c "${selected}"
+    hydrate "${selected_name}" "${selected}"
 fi
 
-if ! tmux has-session -t=$selected_name 2> /dev/null; then
-    tmux new-session -ds $selected_name -c $selected
-    hydrate $selected_name $selected
-fi
-
-switch_to $selected_name
+switch_to "${selected_name}"
