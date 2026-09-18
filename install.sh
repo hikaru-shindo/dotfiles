@@ -89,19 +89,20 @@ log debug "Using target: ${HOME}"
 
 modules=(
     alacritty
-    ghostty
-    kitty
-    wezterm
+    btop
     fish
+    git
+    ghostty
     k9s
+    kitty
     kubeswitch
     lazygit
-    btop
-    git
     nvim
-    tmux
-    zellij
     podman
+    ssh
+    tmux
+    wezterm
+    zellij
 )
 
 if [[ $(uname) == "Darwin" ]];
@@ -114,11 +115,11 @@ fi
 if [[ $(uname) == "Linux" ]];
 then
     modules+=(
-        xdg
         gtk
-        qt
-        waybar
         rofi
+        waybar
+        qt
+        xdg
         # Compositors
         hypr
         niri

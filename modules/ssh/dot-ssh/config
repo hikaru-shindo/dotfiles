@@ -1,0 +1,21 @@
+Include ~/.ssh/conf.d/*.conf
+
+Host *
+    # This fixes some issues with kitty/ghostty etc with uncommon TERM values
+    SetEnv TERM=xterm-256color
+
+    # Reuse connections (much faster repeat connects/sessions)
+    # TODO: would be nice, but requires ~/.ssh/sockets to exist and requires testing
+    #ControlMaster auto
+    #ControlPath ~/.ssh/sockets/%r@%h-%p
+    #ControlPersist 10m
+
+    # Security hygiene
+    HashKnownHosts yes
+    StrictHostKeyChecking ask
+    #VisualHostKey yes # this gets annoying fast
+
+    # Agents
+    # This might allow impersonation on untrusted connections
+    # Enable on each host you trust and require this
+    ForwardAgent no
