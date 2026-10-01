@@ -1,10 +1,9 @@
 return {
-    "neovim-treesitter/nvim-treesitter",
+    "nvim-treesitter/nvim-treesitter",
 
-    -- TODO: Hope they will add tags for consistent versioning of my plugins :)
+    -- TODO: Hope they will add tags again for consistent versioning of my plugins :)
     -- tag  = "v0.10.0",
     branch = "main",
-    dependencies = { 'neovim-treesitter/treesitter-parser-registry' },
 
     lazy = false,
     build = ":TSUpdate",
