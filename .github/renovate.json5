@@ -6,4 +6,6 @@
     ':rebaseStalePrs',
   ],
   automerge: true,
+  assigneesFromCodeOwners: true,
+  reviewersFromCodeOwners: true,
 }
