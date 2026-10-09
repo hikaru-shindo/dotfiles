@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+artist="$(playerctl metadata --format '{{ artist }}' 2>/dev/null || true)"
+title="$(playerctl metadata --format '{{ title }}' 2>/dev/null || true)"
+url="$(playerctl metadata --format '{{ xesam:url }}' 2>/dev/null || true)"
+output_parts=()
+
+if [[ -n "${artist}" ]]; then
+    output_parts+=("${artist}")
+fi
+
+if [[ -n "${title}" ]]; then
+    output_parts+=("${title}")
+fi
+
+if (( ${#output_parts[@]} == 0 )) && [[ -n "${url}" ]]; then
+    file=$(basename "${url}")
+    output_parts+=("$(printf '%b' "${file//%/\\x}")")
+fi
+
+output=$(printf ' - %s' "${output_parts[@]}")
+echo -n "${output:3}"
