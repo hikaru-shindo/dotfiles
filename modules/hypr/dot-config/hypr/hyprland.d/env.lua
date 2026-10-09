@@ -38,3 +38,6 @@ hl.env("MOZ_ENABLE_WAYLAND", 1)
 hl.env("OZONE_PLATFORM", "wayland")
 hl.env("ELECTRON_OZONE_PLATFORM_HINT", "wayland")
 hl.env("GDK_BACKEND", "wayland")
+
+-- Wine fix
+hl.env("WINEDLLOVERRIDES", "winemenubuilder.exe=d") -- This stops wine from registering WMP to play media
