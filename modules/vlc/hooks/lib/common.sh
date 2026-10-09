@@ -14,8 +14,7 @@ function vlc_set {
     local config_dir="${XDG_CONFIG_HOME:-${HOME}/.config}/vlc"
     local rc_file="${config_dir}/vlcrc"
 
-    if [[ -z "${section}" || -z "${key}" ]];
-    then
+    if [[ -z "${section}" || -z "${key}" ]]; then
         log error "invalid vlc section or key section=${section} key=${key}"
         return 1
     fi
@@ -24,25 +23,21 @@ function vlc_set {
         exec mkdir -p "${config_dir}"
     fi
 
-    if [[ ! -f "${rc_file}" ]];
-    then
+    if [[ ! -f "${rc_file}" ]]; then
         exec touch "${rc_file}"
     fi
 
-    if [[ -z "${value}" ]];
-    then
-        if grep -qe "^${key}=" "${rc_file}";
+    if [[ -z "${value}" ]]; then
+        if grep -qE "^${key}=" "${rc_file}";
         then
-            exec sed -i -e "s|^${key}=|#${key}=|" "${rc_file}"
+            exec sed -i -E "s|^${key}=|#${key}=|" "${rc_file}"
         else
             log debug "${key} already uses the default value. skipping."
         fi
-    elif grep -qe "^#?${key}=" "${rc_file}";
-    then
-        exec sed -i -e "s|^#?${key}=.*|${key}=${value}|" "${rc_file}"
-    elif exec grep -qe "^\[${section}\]" "${rc_file}";
-    then
-        exec sed -i -e "/^\[${section}\]/a ${key}=${value}" "${rc_file}"
+    elif grep -qE "^#?${key}=" "${rc_file}"; then
+        exec sed -i -E "s|^#?${key}=.*|${key}=${value}|" "${rc_file}"
+    elif grep -qE "^\[${section}\]" "${rc_file}"; then
+        exec sed -i -E "/^\[${section}\]/a ${key}=${value}" "${rc_file}"
     else
         exec_silent tee -a "${rc_file}" <<< $'\n'"[${section}]"$'\n'"${key}=${value}"
     fi

@@ -22,6 +22,7 @@ add_modules \
 
 # Desktop Applications
 add_modules \
+    celluloid \
     vlc \
     zen
 
