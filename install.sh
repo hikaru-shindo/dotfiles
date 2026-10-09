@@ -84,6 +84,47 @@ function gsettings_set {
     fi
 }
 
+function vlc_set {
+    local section="$1"
+    local key="$2"
+    local value="${3:-}"
+    local config_dir="${XDG_CONFIG_HOME:-${HOME}/.config}/vlc"
+    local rc_file="${config_dir}/vlcrc"
+
+    if [[ -z "${section}" || -z "${key}" ]];
+    then
+        log error "invalid vlc section or key section=${section} key=${key}"
+        return 1
+    fi
+
+    if [[ ! -d "${config_dir}" ]]; then
+        exec mkdir -p "${config_dir}"
+    fi
+
+    if [[ ! -f "${rc_file}" ]];
+    then
+        exec touch "${rc_file}"
+    fi
+
+    if [[ -z "${value}" ]];
+    then
+        if grep -qE "^${key}=" "${rc_file}";
+        then
+            exec sed -i -E "s|^${key}=|#${key}=|" "${rc_file}"
+        else
+            log debug "${key} already uses the default value. Skipping."
+        fi
+    elif grep -qE "^#?${key}=" "${rc_file}";
+    then
+        exec sed -i -E "s|^#?${key}=.*|${key}=${value}|" "${rc_file}"
+    elif exec grep -qE "^\[${section}\]" "${rc_file}";
+    then
+        exec sed -i -E "/^\[${section}\]/a ${key}=${value}" "${rc_file}"
+    else
+        exec_silent tee -a "${rc_file}" <<< $'\n'"[${section}]"$'\n'"${key}=${value}"
+    fi
+}
+
 log debug "Using source: ${source}"
 log debug "Using target: ${HOME}"
 
@@ -274,6 +315,19 @@ then
     exec flatpak override --user --filesystem="xdg-config/Kvantum:ro"
     exec flatpak override --user --filesystem="${source}/qt:ro"
     exec flatpak override --user --env=QT_STYLE_OVERRIDE=kvantum
+fi
+
+if [[ $(command -v vlc) ]];
+then
+    log info "Configuring VLC"
+    if pgrep -x vlc > /dev/null;
+    then
+        log warn "VLC is running and may overwrite its configuration file on exit"
+    fi
+
+    log info "Enabling VLC metadata for network files"
+    vlc_set core metadata-network-access 1
+    vlc_set qt qt-privacy-ask 0
 fi
 
 if [[ $(command -v xdg-mime) ]];
