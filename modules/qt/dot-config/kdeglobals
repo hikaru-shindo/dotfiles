@@ -5,7 +5,7 @@ TerminalApplication=kitty
 Theme=breeze-dark
 
 [UiSettings]
-ColorScheme=Sweet-Ambar-Blue # fixes text colours in dolphin
+ColorScheme=Catppuccin-MochaBlue
 
 [KDE]
 widgetStyle=qt6ct-style
