@@ -9,3 +9,10 @@ listener {
     on-timeout = brightnessctl -s set 10
     on-resume = brightnessctl -r
 }
+
+# turn off keyboard backlight
+listener {
+    timeout = 150 # 2.5 minutes
+    on-timeout = brightnessctl -sd rgb:kbd_backlight set 0
+    on-resume = brightnessctl -rd rgb:kbd_backlight
+}
