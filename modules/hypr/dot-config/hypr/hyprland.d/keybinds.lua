@@ -4,8 +4,8 @@
 local mainMod = "SUPER"
 
 -- general binds
-hl.bind(mainMod .. " + SHIFT" .. " + E", hl.dsp.exit())
-hl.bind(mainMod .. " + SHIFT" .. " + C", hl.dsp.exec_cmd("hyprctl reload config-only"))
+hl.bind(mainMod .. " + SHIFT + E", hl.dsp.exit())
+hl.bind(mainMod .. " + SHIFT + C", hl.dsp.reload_config())
 
 -- general shortcuts
 hl.bind(mainMod .. " + Return", hl.dsp.exec_cmd(PROGRAMMES.terminal))
