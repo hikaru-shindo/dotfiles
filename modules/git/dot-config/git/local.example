@@ -1,0 +1,8 @@
+[includeif "gitdir:~/work/"]
+    path = identities/work
+
+[includeIf "hasconfig:remote.*.url:git@github.com:yourcompany/**"]
+    path = identities/work
+
+[includeif "gitdir:~/personal/"]
+    path = identities/personal
