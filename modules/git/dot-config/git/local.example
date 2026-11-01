@@ -1,8 +1,18 @@
-[includeif "gitdir:~/work/"]
+; This file contains examples for setting up local identities per project.
+; Please be aware that order matters, later matches override previous ones.
+
+; all projects under ~/work recursively
+[includeIf "gitdir:~/work/"]
     path = identities/work
 
+; all personal projects under ~/personal recursively
+[includeIf "gitdir:~/personal/"]
+    path = identities/personal
+
+; projects with a specific git remote
 [includeIf "hasconfig:remote.*.url:git@github.com:yourcompany/**"]
     path = identities/work
 
-[includeif "gitdir:~/personal/"]
-    path = identities/personal
+; the specific project in ~/work/special-project not recursive
+[includeIf "gitdir:~/work/special-project/.git"]
+    path = identities/special-customer
