@@ -1,18 +1,20 @@
-[core]
-    excludesfile = ~/.gitignore_global
-    pager = diff-so-fancy | less --tabs=4 -RFX
 [user]
     name = Pascal Nitsche
     email = saikootau@gmail.com
     signingkey = 4F2BA47C606977E4
 
-[color]
-    ui = true
+[core]
+    pager = "if command -v diff-so-fancy >/dev/null; then diff-so-fancy | less --tabs=4 -RFX; else less --tabs=4 -RFX; fi"
+
+[interactive]
+    diffFilter = "if command -v diff-so-fancy >/dev/null; then diff-so-fancy --patch; else cat; fi"
+
 [color "diff-highlight"]
     oldNormal = red bold
     oldHighlight = red bold 52
     newNormal = green bold
     newHighlight = green bold 22
+
 [color "diff"]
     meta = 11
     frag = magenta bold
@@ -20,5 +22,16 @@
     old = red bold
     new = green bold
     whitespace = red reverse
+
 [init]
     defaultBranch = main
+
+[pull]
+    rebase = true
+
+[push]
+    autoSetupRemote = true
+
+[include]
+    ; machine-specific, optional overrides mainly for identity config
+    path = local
