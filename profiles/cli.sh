@@ -15,6 +15,7 @@ add_modules \
     btop \
     fish \
     git \
+    go \
     k9s \
     kubeswitch \
     lazygit \
