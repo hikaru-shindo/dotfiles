@@ -1,0 +1,369 @@
+@import url("themes/catppuccin-mocha.css");
+
+* {
+    font-family: "JetBrainsMono Nerd Font Mono";
+    font-size: 17px;
+}
+
+/* ==== Bar ============================================================ */
+
+/* Transparent bar: only the pills are visible */
+.background,
+#bar,
+#bar #start,
+#bar #center,
+#bar #end {
+    background: transparent;
+    color: @text;
+    min-height: 0;
+}
+
+/* ---- The bar's own buttons: no GTK decoration in any state --------- */
+/* Workspace dots, tray icons, volume, battery and clock buttons.
+   Only these widgets themselves, never their descendants (popups). */
+
+#bar .workspaces .item,
+#bar .workspaces .item:hover,
+#bar .workspaces .item:active,
+#bar .workspaces .item:focus,
+#bar .workspaces .item:focus-visible,
+#bar .workspaces .item:checked,
+#bar .tray .item,
+#bar .tray .item:hover,
+#bar .tray .item:active,
+#bar .tray .item:focus,
+#bar .tray .item:focus-visible {
+    background-color: transparent;
+    background-image: none;
+    border: none;
+    box-shadow: none;
+    outline: none;
+    transition: none;
+    min-height: 0;
+}
+
+#bar .volume,
+#bar .volume:hover,
+#bar .volume:active,
+#bar .volume:focus,
+#bar .volume:focus-visible,
+#bar .volume:checked,
+#bar .battery,
+#bar .battery:hover,
+#bar .battery:active,
+#bar .battery:focus,
+#bar .battery:focus-visible,
+#bar .battery:checked,
+#bar .clock,
+#bar .clock:hover,
+#bar .clock:active,
+#bar .clock:focus,
+#bar .clock:focus-visible,
+#bar .clock:checked {
+    background-image: none;
+    border: none;
+    box-shadow: none;
+    outline: none;
+    transition: none;
+    min-height: 0;
+}
+
+#bar .tray .item {
+    padding: 0;
+}
+
+/* ---- Workspaces ----------------------------------------------------- */
+
+#bar .workspaces {
+    background-color: @surface0;
+    border: none;
+    border-radius: 1rem;
+    margin: 5px;
+    margin-left: 1rem;
+}
+
+/* 1px extra top/bottom: GTK 4 lays out text lines slightly tighter than
+   Waybar's GTK 3, which made the pill ~2px lower */
+#bar .workspaces .item {
+    border-radius: 1rem;
+    padding: calc(0.4rem + 1px) 0.4rem;
+}
+
+/* Hovered dot: a faint light wash over the pill, like GTK 3's Adwaita in
+   Waybar. Drawn once, as an inset shadow (it follows the rounded corners);
+   the background stays transparent so the two can't stack. */
+#bar .workspaces .item:hover {
+    background-color: transparent;
+    box-shadow: inset 0 0 0 100px alpha(@text, 0.08);
+}
+
+#bar .workspaces .item label         { color: @lavender; }
+#bar .workspaces .item.focused label { color: @sky; }
+#bar .workspaces .item:hover label   { color: @sapphire; }   /* your Waybar hover */
+#bar .workspaces .item.urgent label  { color: @red; }
+
+/* ---- Submap --------------------------------------------------------- */
+
+#bar .bindmode {
+    background-color: @surface0;
+    border: none;
+    border-radius: 1rem;
+    margin: 5px;
+    margin-left: 1rem;
+    padding: 0.5rem 1rem;
+    color: @yellow;
+}
+
+/* ---- Pill segments: same background in every state ----------------- */
+
+#bar .music,
+#bar .volume,
+#bar .battery,
+#bar .notifications,
+#bar .clock,
+#bar .tray,
+#bar .lock {
+    padding: 0.5rem 1rem;
+    margin: 5px 0;
+    border: none;          /* no theme borders between joined segments */
+    box-shadow: none;
+    outline: none;
+}
+
+#bar .music,   #bar .music:hover,   #bar .music:active,   #bar .music:focus,   #bar .music:checked,
+#bar .volume,  #bar .volume:hover,  #bar .volume:active,  #bar .volume:focus,  #bar .volume:checked,
+#bar .battery, #bar .battery:hover, #bar .battery:active, #bar .battery:focus, #bar .battery:checked,
+#bar .notifications, #bar .notifications:hover, #bar .notifications:active,
+#bar .notifications:focus, #bar .notifications:checked,
+#bar .clock,   #bar .clock:hover,   #bar .clock:active,   #bar .clock:focus,   #bar .clock:checked,
+#bar .tray,    #bar .tray:hover,
+#bar .lock,    #bar .lock:hover,    #bar .lock:active,    #bar .lock:focus {
+    background-color: @surface0;
+}
+
+/* ---- Music ---------------------------------------------------------- */
+
+#bar .music {
+    border-radius: 1rem;
+    color: @mauve;
+}
+
+/* ---- Volume / battery / notifications / clock: one pill ------------ */
+/* Colours are set on the segment and inherited by its labels. */
+
+#bar .volume {
+    border-radius: 1rem 0 0 1rem;
+    margin-left: 1rem;
+    color: @maroon;
+}
+
+#bar .battery {
+    border-radius: 0;
+    color: @green;
+}
+#bar .battery.warning,
+#bar .battery.critical {
+    color: @red;
+}
+
+/* The notifications segment is a label widget itself */
+#bar .notifications {
+    border-radius: 0;
+    color: @teal;
+}
+
+#bar .clock {
+    border-radius: 0 1rem 1rem 0;
+    margin-right: 1rem;
+    color: @blue;
+}
+
+/* ---- Tray ----------------------------------------------------------- */
+
+#bar .tray {
+    border-radius: 1rem;
+    margin-right: 1rem;
+}
+
+#bar .tray .item {
+    padding: 0 4px;
+}
+
+/* ---- Lock: half pill against the screen edge ------------------------ */
+
+#bar .lock {
+    border-radius: 1rem 0 0 1rem;
+    color: @lavender;
+}
+
+/* ==== Popups ========================================================= */
+/* Shared look for all popups. Each module's popup then takes the
+   module's colour (see the per-module sections below). */
+
+.popup {
+    background-color: @base;
+    border: 1px solid @surface1;
+    border-radius: 1rem;
+    padding: 1rem;
+    color: @text;
+}
+
+.popup label {
+    color: @text;
+}
+
+/* Buttons: theme colours for rest / hover / pressed */
+.popup button {
+    background-color: @surface0;
+    background-image: none;
+    color: @text;
+    border: none;
+    border-radius: 0.5rem;
+    padding: 0.25rem 0.75rem;
+}
+
+.popup button:hover {
+    background-color: @surface1;
+}
+
+.popup button:active,
+.popup button:checked {
+    background-color: @surface2;
+}
+
+/* Sliders: replace the GTK theme's own drawing (images and borders) */
+.popup scale {
+    margin: 0.5rem 0;
+}
+
+.popup scale trough {
+    background-color: @surface1;
+    background-image: none;
+    border: none;
+    border-radius: 1rem;
+    min-height: 6px;
+    min-width: 6px;
+}
+
+.popup scale trough highlight {
+    background-color: @lavender;
+    background-image: none;
+    border: none;
+    border-radius: 1rem;
+}
+
+.popup scale trough slider {
+    background-color: @text;
+    background-image: none;
+    border: none;
+    border-radius: 50%;
+    min-height: 16px;
+    min-width: 16px;
+    margin: -5px;          /* centre the 16px knob on the 6px track */
+}
+
+/* ---- Volume mixer: maroon, like the volume segment ----------------- */
+/* Placed after the shared popup rules, so it wins at equal specificity. */
+
+.popup-volume,
+.popup-volume label,
+.popup-volume button {
+    color: @maroon;
+}
+
+.popup-volume scale trough highlight {
+    background-color: @maroon;
+}
+
+.popup-volume .device-box .slider,
+.popup-volume .apps-box .app-box .slider {
+    min-width: 12rem;
+}
+
+/* Mute buttons: plain maroon icons, background only on hover.
+   "button.btn-mute" plus the states outranks the shared popup button
+   rules, including their :checked state. */
+.popup-volume button.btn-mute,
+.popup-volume button.btn-mute:active,
+.popup-volume button.btn-mute:checked {
+    background-color: transparent;
+    padding: 0.25rem 0.5rem;
+}
+
+.popup-volume button.btn-mute:hover {
+    background-color: @surface1;
+}
+
+/* Same fixed height above both sliders: the device dropdown on the left,
+   the app title on the right */
+.popup-volume .device-box .device-selector,
+.popup-volume .device-box .device-selector button {
+    min-height: 2rem;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.popup-volume .apps-box .app-box {
+    padding: 0;
+    margin: 0;
+}
+
+.popup-volume .apps-box .app-box .title {
+    color: @maroon;
+    min-height: 2rem;
+    padding: 0;
+}
+
+/* The app column spaces its widgets more tightly than the device column
+   (set in ironbar's code). Measured from a screenshot: its slider sat 6px
+   and its mute button 10px higher. Adjust these if still off. */
+.popup-volume .apps-box .app-box .slider {
+    margin-top: calc(0.5rem + 6px);
+}
+
+.popup-volume .apps-box .app-box .btn-mute {
+    margin-top: 4px;
+}
+
+/* ---- Calendar: blue, like the clock segment ------------------------ */
+
+.popup-clock,
+.popup-clock label,
+.popup-clock button {
+    color: @blue;
+}
+
+.popup-clock .calendar-clock {
+    color: @blue;
+}
+
+/* No box behind the calendar grid */
+.popup-clock .calendar {
+    background-color: transparent;
+    border: none;
+    color: @blue;
+}
+
+/* Month/year navigation: transparent, background only on hover */
+.popup-clock .calendar button,
+.popup-clock .calendar button:active,
+.popup-clock .calendar button:checked {
+    background-color: transparent;
+    color: @blue;
+}
+
+.popup-clock .calendar button:hover {
+    background-color: @surface1;
+}
+
+/* Days from the previous/next month */
+.popup-clock .calendar label.other-month {
+    color: alpha(@blue, 0.4);
+}
+
+/* Today / selected day: blue background, dark text */
+.popup-clock .calendar label:selected {
+    background-color: @blue;
+    color: @crust;
+    border-radius: 0.5rem;
+}

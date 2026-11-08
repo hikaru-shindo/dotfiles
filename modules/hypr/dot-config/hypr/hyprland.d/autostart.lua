@@ -6,7 +6,7 @@ hl.on("hyprland.start", function()
     hl.exec_cmd("nm-applet --indicator")
     hl.exec_cmd("swaync")
     hl.exec_cmd("blueman-applet")
-    hl.exec_cmd("waybar")
+    hl.exec_cmd("ironbar")
     hl.exec_cmd("~/.config/hypr/scripts/hypridle-session.sh")
     hl.exec_cmd("systemctl --user restart hyprpolkitagent")
     -- Start graphical applications

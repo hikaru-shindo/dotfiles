@@ -31,6 +31,7 @@ if platform_matches linux; then
     add_modules \
         flatpak \
         gtk \
+        ironbar \
         nemo \
         qt \
         rofi \

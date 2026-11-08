@@ -1,0 +1,84 @@
+# yaml-language-server: $schema=https://f.jstanger.dev/github/ironbar/schema.json
+
+position: top
+anchor_to_edges: true
+height: 42
+
+start:
+  - type: workspaces
+    format: " \u25cf " # ●
+    sort: name
+    all_monitors: true
+
+  - type: bindmode # Hyprland submap
+
+center:
+  - type: label
+    class: music
+    label: "\U000F075A  {{5000:~/.local/bin/waybar-player-metadata}}"
+    on_click_left: playerctl play-pause
+    show_if: playerctl status # hide when no player is running
+    truncate:
+      mode: end
+      max_length: 50
+
+end:
+  - type: volume
+    format: "{icon} {percentage}%"
+    mute_format: "{icon}"
+    show_sources: false
+    icons:
+      volume: "\uf028"
+      mmuted: "\uf6a9"
+    profiles:
+      medium:
+        when: 66.66
+        icons:
+          volume: "\uf027"
+      low:
+        when: 33.33
+        icons:
+          volume: "\uf026"
+    # Built-in mixer popup on left click. So override for pavucontrol
+    disable_popup: true
+    on_click_left: pavucontrol
+
+  - type: battery
+    show_if: test -e /sys/class/power_supply/BAT0   # laptop only
+    show_icon: false
+    format: "\U000F12A3 {percentage}%"
+    profiles:
+      warning:
+        when: { percent: 30, charging: false }
+        format: "\U000F12A1 {percentage}%"
+      critical:
+        when: { percent: 15, charging: false }
+        format: "\U000F008E {percentage}%"
+
+  # The notifcation module broke the layout so a simple label will do
+  # even if there are more then 9 notifications. This can size dynamically.
+  - type: label
+    class: notifications
+    label: >-
+      {{watch:swaync-client -s | while read -r _; do
+      n="$(swaync-client -c)";
+      if [ "$(swaync-client -D)" = true ]; then i='\U000F009B';
+      elif [ "$n" -gt 0 ]; then i='\U000F009A';
+      else i='\U000F009A'; fi;
+      printf "%s $i\n" "$n";
+      done}}
+    on_click_left: swaync-client -t -sw # toggle panel
+    on_click_right: swaync-client -d -sw # toggle DnD
+
+  - type: clock
+    format: "\U000F0954 %H:%M"
+    format_popup: "%A %d %B %Y"
+    locale: en_GB
+
+  - type: tray
+    icon_size: 21
+
+  - type: label
+    class: lock
+    label: "\uf023"
+    on_click_left: "(sleep 0.5; hyprlock --grace 0) &"

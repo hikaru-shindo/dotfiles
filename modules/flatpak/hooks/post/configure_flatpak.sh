@@ -11,7 +11,7 @@ function configure_flatpak {
     log info "Configuring flatpak GTK themes"
     exec flatpak override --user --filesystem="xdg-config/gtk-3.0:ro"
     exec flatpak override --user --filesystem="xdg-config/gtk-4.0:ro"
-    exec flatpak override --user --filesystem="xdg-data/themes:ro"
+    exec flatpak override --user --filesystem="xdg-data/gtk-palettes:ro"
     exec flatpak override --user --filesystem="$(modules_directory)/gtk:ro"
 
     # Needs org.kde.KStyle.Kvantum installed but still does not work
