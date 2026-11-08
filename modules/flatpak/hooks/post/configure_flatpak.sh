@@ -14,12 +14,11 @@ function configure_flatpak {
     exec flatpak override --user --filesystem="xdg-data/gtk-palettes:ro"
     exec flatpak override --user --filesystem="$(modules_directory)/gtk:ro"
 
-    # Needs org.kde.KStyle.Kvantum installed but still does not work
-    # needs more investigation ...
     log info "Configuring flatpak Qt themes"
-    exec flatpak override --user --filesystem="xdg-config/Kvantum:ro"
+    exec flatpak override --user --filesystem="xdg-config/kdeglobals:ro"
     exec flatpak override --user --filesystem="$(modules_directory)/qt:ro"
-    exec flatpak override --user --env=QT_STYLE_OVERRIDE=kvantum
+    exec flatpak override --user --env=QT_QPA_PLATFORMTHEME="kde"
+    exec flatpak override --user --env=QT_STYLE_OVERRIDE="Breeze"
 }
 
 exec_conditional flatpak "configure_flatpak"

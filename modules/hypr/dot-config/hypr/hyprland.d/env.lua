@@ -7,12 +7,9 @@ hl.env("XDG_CURRENT_DESKTOP", "Hyprland")
 hl.env("XDG_SESSION_TYPE", "wayland")
 hl.env("XDG_SESSION_DESKTOP", "Hyprland")
 
--- kde plasma app fix ... annoyinga
-hl.env("XDG_MENU_PREFIX", "arch-")
-
 -- Cursors
-hl.env("XCURSOR_SIZE", 24)
-hl.env("HYPRCURSOR_SIZE", 24)
+hl.env("XCURSOR_SIZE", "24")
+hl.env("HYPRCURSOR_SIZE", "24")
 
 -- Input methods
 
@@ -25,19 +22,23 @@ hl.env("HYPRCURSOR_SIZE", 24)
 -- hl.env("INPUT_METHOD", "fcitx")
 
 -- Qt
-hl.env("QT_AUTO_SCREEN_SCALE_FACTOR", 1)
-hl.env("QT_QPA_PLATFORM", "wayland")
+hl.env("QT_AUTO_SCREEN_SCALE_FACTOR", "1")
+hl.env("QT_QPA_PLATFORM", "wayland;xcb")
 hl.env("QT_QPA_PLATFORMTHEME", "qt6ct")
-hl.env("QT_WAYLAND_DISABLE_WINDOWDECORATION", 1)
+hl.env("QT_WAYLAND_DISABLE_WINDOWDECORATION", "1")
 
 -- GTK
-hl.env("GTK_USE_PORTAL", 1) -- force zen browser to use the desktop portal
+hl.env("GTK_USE_PORTAL", "1") -- force zen browser to use the desktop portal
+
+-- KDE
+hl.env("PLASMA_INTEGRATION_USE_PORTAL", "1") -- force KDE apps to use the desktop portal
+hl.env("XDG_MENU_PREFIX", "arch-") -- kde plasma app fix ... annoyinga
 
 -- Waylannd Backends
-hl.env("MOZ_ENABLE_WAYLAND", 1)
+hl.env("MOZ_ENABLE_WAYLAND", "1")
 hl.env("OZONE_PLATFORM", "wayland")
 hl.env("ELECTRON_OZONE_PLATFORM_HINT", "wayland")
-hl.env("GDK_BACKEND", "wayland")
+hl.env("GDK_BACKEND", "wayland,x11")
 
 -- Wine fix
 hl.env("WINEDLLOVERRIDES", "winemenubuilder.exe=d") -- This stops wine from registering WMP to play media
