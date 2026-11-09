@@ -8,6 +8,7 @@ It contains any files needed to jump-start the user profile.
 For the installation you really only need:
 
 - GNU stow
+- Bash >= 4.0
 
 But for all steps in the installation script to succeed you should also install:
 
@@ -30,6 +31,8 @@ After the first run you may run `install.sh` without any profile. The last profi
 selected are remembered.
 
 **Attention: This is tested on Arch linux and macOS (Apple silicon) and may not work on other OSes**
+
+**macOS: macOS ships with bash 3.2. Install bash from Homebrew and run /opt/homebrew/bin/bash install.sh <profile> on the first run.**
 
 ## Profiles
 
