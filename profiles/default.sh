@@ -22,7 +22,6 @@ add_modules \
 
 # Desktop Applications
 add_modules \
-    celluloid \
     vlc \
     zen
 
@@ -37,6 +36,10 @@ if platform_matches linux; then
         rofi \
         waybar \
         xdg
+
+    # Desktop Applications
+    add_modules \
+        celluloid
 
     # Compositors
     add_modules \
